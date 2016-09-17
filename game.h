@@ -16,9 +16,16 @@ private:
     void update();
     void render();
 
+    void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
+
 private:
     sf::RenderWindow _window;
     sf::CircleShape _player;
+
+    bool _isMovingUp;
+    bool _isMovingDown;
+    bool _isMovingLeft;
+    bool _isMovingRight;
 };
 
 
