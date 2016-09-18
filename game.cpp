@@ -1,11 +1,45 @@
 
+#include <cassert>
+#include <string>
+
 #include "game.h"
 
-Game::Game():_window(sf::VideoMode(640, 480), "MY Game!"),_player()
+#ifdef __APPLE__
+#include <CoreFoundation/CoreFoundation.h>
+#endif//__APPLE__
+
+namespace {
+    std::string getBundlePath() {
+#ifdef __APPLE__
+        CFBundleRef mainBundle = CFBundleGetMainBundle();
+        CFURLRef resourceUrl = CFBundleCopyResourcesDirectoryURL(mainBundle);
+        char path[PATH_MAX];
+        if (!CFURLGetFileSystemRepresentation(resourceUrl, TRUE, (UInt8*)path, PATH_MAX)) {
+            return "";
+        }
+        CFRelease(resourceUrl);
+        return std::string(path) + "/";
+#else
+        return "";
+#endif//__APPLE__
+    }
+
+    std::string resourcePath(const std::string& path) {
+        return getBundlePath() + path;
+    }
+}
+
+Game::Game():
+    _window(sf::VideoMode(640, 480), "MY Game!"),
+    _texture(),
+    _player()
 {
-    _player.setRadius(40.0f);
+    if (!_texture.loadFromFile(resourcePath("media/textures/eagle.png"))) {
+        // TODO: Handle resource error
+        abort();
+    }
+    _player.setTexture(_texture);
     _player.setPosition(100.0f, 100.0f);
-    _player.setFillColor(sf::Color::Cyan);
 }
 
 Game::~Game()

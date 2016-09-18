@@ -20,7 +20,8 @@ private:
 
 private:
     sf::RenderWindow _window;
-    sf::CircleShape _player;
+    sf::Texture _texture;
+    sf::Sprite _player;
 
     bool _isMovingUp;
     bool _isMovingDown;
