@@ -13,7 +13,7 @@ public:
 
 private:
     void processEvents();
-    void update();
+    void update(sf::Time deltaTime);
     void render();
 
     void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
@@ -26,6 +26,8 @@ private:
     bool _isMovingDown;
     bool _isMovingLeft;
     bool _isMovingRight;
+
+    const float PlayerSpeed = 32.0f;
 };
 
 

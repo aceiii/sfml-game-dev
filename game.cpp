@@ -14,9 +14,12 @@ Game::~Game()
 
 void Game::run()
 {
+    sf::Clock clock;
     while (_window.isOpen()) {
+        sf::Time deltaTime = clock.restart();
+
         processEvents();
-        update();
+        update(deltaTime);
         render();
     }
 }
@@ -46,24 +49,24 @@ void Game::render()
     _window.display();
 }
 
-void Game::update()
+void Game::update(sf::Time deltaTime)
 {
     sf::Vector2f movement(0.0f, 0.0f);
 
     if (_isMovingUp) {
-        movement.y -= 1.0f;
+        movement.y -= PlayerSpeed;
     }
     if (_isMovingDown) {
-        movement.y += 1.0f;
+        movement.y += PlayerSpeed;
     }
     if (_isMovingLeft) {
-        movement.x -= 1.0f;
+        movement.x -= PlayerSpeed;
     }
     if (_isMovingRight) {
-        movement.x += 1.0f;
+        movement.x += PlayerSpeed;
     }
 
-    _player.move(movement);
+    _player.move(movement * deltaTime.asSeconds());
 }
 
 void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
