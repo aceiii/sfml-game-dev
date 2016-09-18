@@ -28,6 +28,7 @@ private:
     bool _isMovingRight;
 
     const float PlayerSpeed = 32.0f;
+    const sf::Time TimePerFrame = sf::seconds(1.0f / 60.0f);
 };
 
 

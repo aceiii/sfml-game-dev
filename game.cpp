@@ -15,11 +15,15 @@ Game::~Game()
 void Game::run()
 {
     sf::Clock clock;
+    sf::Time timeSinceLastUpdate = sf::Time::Zero;
     while (_window.isOpen()) {
-        sf::Time deltaTime = clock.restart();
-
         processEvents();
-        update(deltaTime);
+        timeSinceLastUpdate += clock.restart();
+        while (timeSinceLastUpdate > TimePerFrame) {
+            timeSinceLastUpdate -= TimePerFrame;
+            processEvents();
+            update(TimePerFrame);
+        }
         render();
     }
 }
