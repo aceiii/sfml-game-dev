@@ -25,4 +25,6 @@ private:
 };
 
 
+#include "resourceholder.hpp"
+
 #endif//__RESOURCE_HOLDER_H__

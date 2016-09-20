@@ -1,8 +1,8 @@
-#include <string>
-#include <memory>
-#include <exception>
+#ifndef __RESOURCE_HOLDER_IMPL_H__
+#define __RESOURCE_HOLDER_IMPL_H__
 
-#include "resourceholder.h"
+#include <cassert>
+
 
 template <typename R, typename I>
 void ResourceHolder<R, I>::load(I id, const std::string& filename) {
@@ -43,3 +43,5 @@ const R& ResourceHolder<R, I>::get(I id) const {
     return *found->second;
 }
 
+
+#endif//__RESOURCE_HOLDER_IMPL_H__
