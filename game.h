@@ -3,6 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "world.h"
+
+
 class Game
 {
 public:
@@ -20,8 +23,8 @@ private:
 
 private:
     sf::RenderWindow _window;
-    sf::Texture _texture;
-    sf::Sprite _player;
+
+    World _world;
 
     bool _isMovingUp;
     bool _isMovingDown;

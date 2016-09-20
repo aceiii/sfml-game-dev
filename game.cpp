@@ -31,15 +31,8 @@ namespace {
 
 Game::Game():
     _window(sf::VideoMode(640, 480), "MY Game!"),
-    _texture(),
-    _player()
+    _world(_window)
 {
-    if (!_texture.loadFromFile(resourcePath("media/textures/eagle.png"))) {
-        // TODO: Handle resource error
-        abort();
-    }
-    _player.setTexture(_texture);
-    _player.setPosition(100.0f, 100.0f);
 }
 
 Game::~Game()
@@ -83,7 +76,10 @@ void Game::processEvents()
 void Game::render()
 {
     _window.clear();
-    _window.draw(_player);
+    //_window.draw(_player);
+    _world.draw();
+
+
     _window.display();
 }
 
@@ -104,7 +100,8 @@ void Game::update(sf::Time deltaTime)
         movement.x += PlayerSpeed;
     }
 
-    _player.move(movement * deltaTime.asSeconds());
+    //_player.move(movement * deltaTime.asSeconds());
+    _world.update(deltaTime);
 }
 
 void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
