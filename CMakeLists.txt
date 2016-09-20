@@ -17,21 +17,21 @@ find_package(SFML 2 REQUIRED system window graphics)
 
 target_link_libraries(sfml_test ${SFML_LIBRARIES})
 
-if (APPLE)
-    set(MACOSX_DEPLOYMENT_TARGET 10.7)
-    set(CMAKE_BUNDLE_VERSION  "${sfml_test_VERSION_MAJOR}.${sfml_test_VERSION_MINOR}.${sfml_test_VERSION_PATCH}")
-    set(CMAKE_BUNDLE_NAME "CMake ${CMAKE_BUNDLE_VERSION}")
-
-    set_target_properties(sfml_test PROPERTIES
-            MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/mac/Info.plist"
-            MACOSX_BUNDLE_SHORT_VERSION_STRING "${CMAKE_BUNDLE_VERSION}"
-            MACOSX_BUNDLE_BUNDLE_VERSION "${CMAKE_BUNDLE_VERSION}"
-            MACOSX_BUNDLE_COPYRIGHT "Copyright © 2016. All rights reserved. Blah")
-
-    find_library(COREFOUNDATION_LIBRARY CoreFoundation)
-    target_link_libraries(sfml_test ${COREFOUNDATION_LIBRARY})
-
-    add_custom_command(TARGET sfml_test COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/media ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Resources/media)
-else()
+#if (APPLE)
+#    set(MACOSX_DEPLOYMENT_TARGET 10.7)
+#    set(CMAKE_BUNDLE_VERSION  "${sfml_test_VERSION_MAJOR}.${sfml_test_VERSION_MINOR}.${sfml_test_VERSION_PATCH}")
+#    set(CMAKE_BUNDLE_NAME "CMake ${CMAKE_BUNDLE_VERSION}")
+#
+#    set_target_properties(sfml_test PROPERTIES
+#            MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/mac/Info.plist"
+#            MACOSX_BUNDLE_SHORT_VERSION_STRING "${CMAKE_BUNDLE_VERSION}"
+#            MACOSX_BUNDLE_BUNDLE_VERSION "${CMAKE_BUNDLE_VERSION}"
+#            MACOSX_BUNDLE_COPYRIGHT "Copyright © 2016. All rights reserved. Blah")
+#
+#    find_library(COREFOUNDATION_LIBRARY CoreFoundation)
+#    target_link_libraries(sfml_test ${COREFOUNDATION_LIBRARY})
+#
+#    add_custom_command(TARGET sfml_test COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/media ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Resources/media)
+#else()
     add_custom_command(TARGET sfml_test COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/media $<TARGET_FILE_DIR:sfml_test>/media)
-endif()
+#endif()
