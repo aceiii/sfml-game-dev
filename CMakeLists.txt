@@ -17,7 +17,7 @@ set(SOURCE_FILES
     aircraft.cpp
     world.cpp
     spritenode.cpp
-)
+    command.h)
 
 add_executable(sfml_test MACOSX_BUNDLE ${SOURCE_FILES})
 
