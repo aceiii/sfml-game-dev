@@ -29,6 +29,8 @@ public:
     sf::Transform getWorldTransform() const;
     sf::Vector2f getWorldPosition() const;
 
+    virtual unsigned int getCategory() const;
+
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
