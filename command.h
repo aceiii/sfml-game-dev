@@ -4,13 +4,16 @@
 #include <functional>
 #include <SFML/System/Time.hpp>
 
-#include "scenenode.h"
+
+class SceneNode;
 
 
 struct Command
 {
     std::function<void(SceneNode&, sf::Time)> action;
     unsigned int category;
+
+    Command():action(nullptr),category(0) {}
 };
 
 

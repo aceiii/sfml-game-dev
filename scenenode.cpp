@@ -2,6 +2,7 @@
 
 #include "scenenode.h"
 #include "category.h"
+#include "command.h"
 
 SceneNode::SceneNode() {
 }
@@ -63,5 +64,15 @@ sf::Vector2f SceneNode::getWorldPosition() const {
 
 unsigned int SceneNode::getCategory() const {
     return Category::None;
+}
+
+void SceneNode::onCommand(const Command &command, sf::Time deltaTime) {
+    if (command.category & getCategory()) {
+        command.action(*this, deltaTime);
+    }
+
+    for (auto it = _children.begin(); it != _children.end(); it++) {
+        (*it)->onCommand(command, deltaTime);
+    }
 }
 
