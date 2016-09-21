@@ -19,6 +19,10 @@ unsigned int Aircraft::getCategory() const {
     }
 }
 
+void Aircraft::accelerate(sf::Vector2f velocity) {
+    setVelocity(getVelocity() + velocity);
+}
+
 Textures::ID toTextureId(Aircraft::Type type) {
     switch (type) {
     case Aircraft::Type::Eagle:

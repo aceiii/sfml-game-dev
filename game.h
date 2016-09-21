@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "world.h"
+#include "player.h"
 
 
 class Game
@@ -25,6 +26,7 @@ private:
     sf::RenderWindow _window;
 
     World _world;
+    Player _player;
 
     bool _isPaused;
 
