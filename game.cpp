@@ -31,7 +31,8 @@ namespace {
 
 Game::Game():
     _window(sf::VideoMode(640, 480), "MY Game!"),
-    _world(_window)
+    _world(_window),
+    _isPaused(false)
 {
 }
 
@@ -49,7 +50,10 @@ void Game::run()
         while (timeSinceLastUpdate > TimePerFrame) {
             timeSinceLastUpdate -= TimePerFrame;
             processEvents();
-            update(TimePerFrame);
+
+            if (!_isPaused) {
+                update(TimePerFrame);
+            }
         }
         render();
     }
@@ -60,6 +64,12 @@ void Game::processEvents()
     sf::Event event;
     while (_window.pollEvent(event)) {
         switch (event.type) {
+        case sf::Event::GainedFocus:
+            _isPaused = false;
+            break;
+        case sf::Event::LostFocus:
+            _isPaused = true;
+            break;
         case sf::Event::KeyPressed:
             handlePlayerInput(event.key.code, true);
             break;

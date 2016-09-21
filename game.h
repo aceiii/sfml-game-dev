@@ -26,6 +26,8 @@ private:
 
     World _world;
 
+    bool _isPaused;
+
     bool _isMovingUp;
     bool _isMovingDown;
     bool _isMovingLeft;
