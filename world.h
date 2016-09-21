@@ -5,6 +5,7 @@
 #include "textureholder.h"
 #include "layers.h"
 #include "aircraft.h"
+#include "commandqueue.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -19,6 +20,8 @@ public:
 
     void update(sf::Time deltaTime);
     void draw();
+
+    CommandQueue& getCommandQueue();
 
 private:
     void loadTextures();
@@ -43,6 +46,8 @@ private:
     sf::Vector2f _spawnPosition;
     float _scrollSpeed;
     Aircraft* _playerAircraft;
+
+    CommandQueue _commandQueue;
 };
 
 
