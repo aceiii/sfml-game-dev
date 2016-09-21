@@ -25,6 +25,7 @@ public:
     virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 
     void accelerate(sf::Vector2f velocity);
+    void accelerate(float vx, float vy);
 
 private:
     Type _type;

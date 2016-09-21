@@ -23,6 +23,10 @@ void Aircraft::accelerate(sf::Vector2f velocity) {
     setVelocity(getVelocity() + velocity);
 }
 
+void Aircraft::accelerate(float vx, float vy) {
+    setVelocity(vx, vy);
+}
+
 Textures::ID toTextureId(Aircraft::Type type) {
     switch (type) {
     case Aircraft::Type::Eagle:
