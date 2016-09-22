@@ -7,7 +7,10 @@ class States
 public:
     enum ID
     {
+        Title,
+        Menu,
         Game,
+        Pause,
     };
 
 };
