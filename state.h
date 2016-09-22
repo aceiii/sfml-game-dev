@@ -31,7 +31,7 @@ public:
     };
 
 public:
-    State();
+    State(StateStack& stateStack, Context context);
     virtual ~State();
 
     virtual void draw() = 0;

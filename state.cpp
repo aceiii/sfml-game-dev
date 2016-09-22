@@ -1,8 +1,9 @@
 #include "state.h"
 
 
-State::State():_context() {
-
+State::State(StateStack& stateStack, Context context):
+    _stack(&stateStack),_context(context)
+{
 }
 
 State::~State() {
