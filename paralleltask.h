@@ -3,7 +3,14 @@
 
 
 class ParallelTask {
+public:
+    ParallelTask();
 
+    void execute();
+    bool isFinished() const;
+
+    void setCompletion(float percent);
+    float getCompletion() const;
 };
 
 
