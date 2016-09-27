@@ -7,7 +7,7 @@ class Fonts
 public:
     enum ID
     {
-
+        Default,
     };
 };
 
