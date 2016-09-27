@@ -2,6 +2,7 @@
 #include <SFML/System.hpp>
 
 #include "menustate.h"
+#include "util.h"
 
 MenuState::MenuState(StateStack &stateStack, State::Context context):
     State(stateStack, context)
@@ -11,9 +12,7 @@ MenuState::MenuState(StateStack &stateStack, State::Context context):
     sf::Text playOption;
     playOption.setFont(font);
     playOption.setString("Play");
-
-    sf::FloatRect bounds = playOption.getLocalBounds();
-    playOption.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
+    centerOrigin(playOption);
 
     playOption.setPosition(context.window->getView().getSize() / 2.0f);
 
