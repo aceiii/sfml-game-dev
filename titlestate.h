@@ -11,6 +11,13 @@ public:
     virtual void draw() override;
     virtual bool update(sf::Time deltaTime) override;
     virtual bool handleEvent(const sf::Event &event) override;
+
+private:
+    sf::Sprite _backgroundSprite;
+    sf::Text _text;
+
+    bool _showText;
+    sf::Time _textEffectTime;
 };
 
 

@@ -10,10 +10,12 @@ public:
     PauseState(StateStack &stateStack, Context context);
 
     virtual void draw() override;
-
     virtual bool update(sf::Time deltaTime) override;
-
     virtual bool handleEvent(const sf::Event &event) override;
+
+private:
+    sf::Text _pausedText;
+    sf::Text _instructionText;
 };
 
 

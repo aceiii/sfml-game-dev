@@ -12,6 +12,20 @@ public:
     virtual void draw() override;
     virtual bool update(sf::Time deltaTime) override;
     virtual bool handleEvent(const sf::Event &event) override;
+
+private:
+    void updateOptionText();
+
+private:
+    enum OptionNames
+    {
+        Play,
+        Exit,
+    };
+
+    std::vector<sf::Text> _options;
+    std::size_t _optionIndex;
+
 };
 
 
