@@ -37,3 +37,13 @@ bool LoadingState::handleEvent(const sf::Event &event) {
     return false;
 }
 
+void LoadingState::setCompletion(float percent) {
+    if (percent > 1.0f) {
+        percent = 1.0f;
+    }
+
+    _progressBar.setSize(sf::Vector2f(
+        _progressBarBackground.getSize().x * percent,
+        _progressBar.getSize().y
+    ));
+}

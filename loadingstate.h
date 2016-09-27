@@ -14,6 +14,7 @@ public:
     virtual bool update(sf::Time deltaTime) override;
     virtual bool handleEvent(const sf::Event &event) override;
 
+    void setCompletion(float percent);
 private:
     sf::Text _loadingText;
     sf::RectangleShape _progressBarBackground;
