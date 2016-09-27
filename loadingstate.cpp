@@ -30,7 +30,13 @@ void LoadingState::draw() {
 }
 
 bool LoadingState::update(sf::Time deltaTime) {
-    return false;
+    if (_loadingTask.isFinished()) {
+        requestStackPop();
+        requestStackPush(States::Game);
+    } else {
+        setCompletion(_loadingTask.getCompletion());
+    }
+    return true;
 }
 
 bool LoadingState::handleEvent(const sf::Event &event) {
