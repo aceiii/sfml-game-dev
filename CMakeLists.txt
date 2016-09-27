@@ -5,7 +5,7 @@ set(sfml_test_VERSION_MAJOR 1)
 set(sfml_test_VERSION_MINOR 0)
 set(sfml_test_VERSION_PATCH 0)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
@@ -17,11 +17,11 @@ set(SOURCE_FILES
     aircraft.cpp
     world.cpp
     spritenode.cpp
-    command.h category.h commandqueue.cpp commandqueue.h player.cpp player.h aircraftmover.h derivedaction.h statestack.cpp statestack.h state.cpp state.h states.h statestack.hpp fontholder.h fonts.h application.cpp application.h titlestate.cpp titlestate.h menustate.cpp menustate.h gamestate.cpp gamestate.h pausestate.cpp pausestate.h)
+    command.h category.h commandqueue.cpp commandqueue.h player.cpp player.h aircraftmover.h derivedaction.h statestack.cpp statestack.h state.cpp state.h states.h statestack.hpp fontholder.h fonts.h application.cpp application.h titlestate.cpp titlestate.h menustate.cpp menustate.h gamestate.cpp gamestate.h pausestate.cpp pausestate.h printargs.h)
 
 add_executable(sfml_test MACOSX_BUNDLE ${SOURCE_FILES})
 
-find_package(SFML 2 REQUIRED system window graphics)
+find_package(SFML 2 REQUIRED graphics window system)
 
 target_link_libraries(sfml_test ${SFML_LIBRARIES})
 
