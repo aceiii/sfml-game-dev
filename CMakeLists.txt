@@ -17,7 +17,7 @@ set(SOURCE_FILES
     aircraft.cpp
     world.cpp
     spritenode.cpp
-    command.h category.h commandqueue.cpp commandqueue.h player.cpp player.h aircraftmover.h derivedaction.h statestack.cpp statestack.h state.cpp state.h states.h statestack.hpp fontholder.h fonts.h application.cpp application.h titlestate.cpp titlestate.h menustate.cpp menustate.h gamestate.cpp gamestate.h pausestate.cpp pausestate.h printargs.h loadingstate.cpp loadingstate.h paralleltask.cpp paralleltask.h util.h component.cpp component.h container.cpp container.h label.cpp label.h button.cpp button.h settingsstate.cpp settingsstate.h resourcepath.cpp resourcepath.h)
+    command.h category.h commandqueue.cpp commandqueue.h player.cpp player.h aircraftmover.h derivedaction.h statestack.cpp statestack.h state.cpp state.h states.h statestack.hpp fontholder.h fonts.h application.cpp application.h titlestate.cpp titlestate.h menustate.cpp menustate.h gamestate.cpp gamestate.h pausestate.cpp pausestate.h printargs.h loadingstate.cpp loadingstate.h paralleltask.cpp paralleltask.h util.h component.cpp component.h container.cpp container.h label.cpp label.h button.cpp button.h settingsstate.cpp settingsstate.h resourcepath.cpp resourcepath.h easylogging++.h)
 
 add_executable(sfml_test MACOSX_BUNDLE ${SOURCE_FILES})
 

@@ -3,12 +3,18 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
+#include "easylogging++.h"
 #include "statestack.h"
 
 
 class Application
 {
 public:
+    Application();
+
+    void run();
+
+protected:
     void registerStates();
 
     void update(sf::Time deltaTime);
@@ -16,8 +22,15 @@ public:
     void processInput();
 
 private:
+    const sf::Time TimePerFrame = sf::seconds(1.0f / 60.0f);
+
     sf::RenderWindow _window;
+    TextureHolder _textures;
+    FontHolder _fonts;
+    Player _player;
+
     StateStack _stateStack;
+
 };
 
 

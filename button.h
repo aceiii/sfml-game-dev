@@ -32,10 +32,13 @@ namespace GUI
         void setText(const std::string& text);
         void setCallback(function func);
 
+    protected:
+        void draw(sf::RenderTarget& window, sf::RenderStates states) const;
+
     private:
-        sf::Texture _normalTexture;
-        sf::Texture _selectedTexture;
-        sf::Texture _pressedTexture;
+        const sf::Texture& _normalTexture;
+        const sf::Texture& _selectedTexture;
+        const sf::Texture& _pressedTexture;
 
         sf::Sprite _sprite;
         sf::Text _text;

@@ -23,5 +23,5 @@ void State::requestStateClear() {
 }
 
 State::Context State::getContext() const {
-    return State::Context();
+    return _context;
 }

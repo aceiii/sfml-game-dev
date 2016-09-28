@@ -1,19 +1,23 @@
-
 #include <iostream>
 
-#include "game.h"
+#include "easylogging++.h"
+#include "application.h"
 #include "printargs.h"
+
+
+INITIALIZE_EASYLOGGINGPP;
 
 
 int main(int argc, char *argv[]) {
     try {
-        std::cout << "Starting app." << std::endl;
-        std::cout << "Commands: " << print_args(argc, argv) << std::endl;
+        START_EASYLOGGINGPP(argc, argv);
+        LOG(INFO) << "Starting app.";
+        LOG(INFO) << "Commands: " << print_args(argc, argv);
 
-        Game game;
-        game.run();
+        Application app;
+        app.run();
     } catch (std::exception& e) {
-        std::cout << "\nEXCEPTION: " << e.what() << std::endl;
+        LOG(FATAL) << "\nEXCEPTION: " << e.what() << std::endl;
     }
     return 0;
 }

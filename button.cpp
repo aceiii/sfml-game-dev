@@ -1,7 +1,11 @@
 #include "button.h"
 
 
-GUI::Button::Button(const FontHolder &fonts, const TextureHolder &textures) {
+GUI::Button::Button(const FontHolder &fonts, const TextureHolder &textures):
+    _normalTexture(textures.get(Textures::ButtonNormal)),
+    _selectedTexture(textures.get(Textures::ButtonSelected)),
+    _pressedTexture(textures.get(Textures::ButtonPressed))
+{
     _sprite.setTexture(_normalTexture);
     _text.setPosition(sf::Vector2f(_normalTexture.getSize() / 2u));
 }
@@ -62,4 +66,11 @@ void GUI::Button::setCallback(GUI::Button::function func) {
 
 void GUI::Button::handleEvent(const sf::Event &event) {
 
+}
+
+void GUI::Button::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    states.transform *= getTransform();
+
+    target.draw(_sprite);
+    target.draw(_text);
 }

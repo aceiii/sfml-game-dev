@@ -1,4 +1,6 @@
 #include <iostream>
+
+#include "easylogging++.h"
 #include "player.h"
 #include "category.h"
 #include "aircraftmover.h"
@@ -26,7 +28,7 @@ void Player::handleEvent(const sf::Event &event, CommandQueue &commands) {
         Command output;
         output.category = Category::PlayerAircraft;
         output.action = [] (SceneNode& node, sf::Time dt) {
-            std::cout << node.getPosition().x << "," << node.getPosition().y << std::endl;
+            LOG(INFO) << node.getPosition().x << "," << node.getPosition().y;
         };
         commands.push(output);
     }

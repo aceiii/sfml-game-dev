@@ -4,8 +4,9 @@
 #include "statestack.h"
 
 
-StateStack::StateStack(State::Context context) {
-
+StateStack::StateStack(sf::RenderWindow &window, TextureHolder &textures, FontHolder &fonts, Player &player):
+    _context(window, textures, fonts, player)
+{
 }
 
 void StateStack::update(const sf::Time &deltaTime) {

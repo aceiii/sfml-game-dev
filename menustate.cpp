@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
+#include "easylogging++.h"
 #include "menustate.h"
 #include "util.h"
 #include "button.h"
@@ -33,6 +34,7 @@ bool MenuState::update(sf::Time deltaTime) {
 
 bool MenuState::handleEvent(const sf::Event &event) {
     _guiContainer.handleEvent(event);
+    return false;
 }
 
 void MenuState::updateOptionText() {

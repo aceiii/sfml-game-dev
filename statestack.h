@@ -21,7 +21,7 @@ public:
     };
 
 public:
-    explicit StateStack(State::Context context);
+    explicit StateStack(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts, Player& player);
 
     template <typename T>
     void registerState(States::ID stateID);
