@@ -4,11 +4,12 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Graphics/Transformable.hpp>
 
 
 namespace GUI {
 
-    class Component: public sf::Drawable, public sf::Transform, private sf::NonCopyable
+    class Component: public sf::Drawable, public sf::Transformable, private sf::NonCopyable
     {
     public:
         typedef std::shared_ptr<Component> pointer_type;
