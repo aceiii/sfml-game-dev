@@ -51,3 +51,11 @@ void GUI::Button::deactivate() {
         }
     }
 }
+
+void GUI::Button::setText(const std::string &text) {
+    _text.setString(text);
+}
+
+void GUI::Button::setCallback(GUI::Button::function func) {
+    _callback = func;
+}

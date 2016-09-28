@@ -10,7 +10,11 @@
 
 namespace GUI
 {
-    class Button : public GUI::Component {
+    class Button : public GUI::Component
+    {
+    public:
+        typedef std::function<void()> function;
+
     public:
         Button(const FontHolder &fonts, const TextureHolder &textures);
 
@@ -23,6 +27,9 @@ namespace GUI
         virtual void activate();
         virtual void deactivate();
 
+        void setText(const std::string& text);
+        void setCallback(function func);
+
     private:
         sf::Texture _normalTexture;
         sf::Texture _selectedTexture;
@@ -33,7 +40,7 @@ namespace GUI
 
         bool _isToggle;
 
-        std::function<void()> _callback;
+        function _callback;
 
     };
 }
