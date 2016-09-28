@@ -8,6 +8,7 @@ public:
     enum ID
     {
         Default,
+        Label,
     };
 };
 
