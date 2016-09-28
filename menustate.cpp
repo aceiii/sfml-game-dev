@@ -3,61 +3,36 @@
 
 #include "menustate.h"
 #include "util.h"
+#include "button.h"
 
 MenuState::MenuState(StateStack &stateStack, State::Context context):
     State(stateStack, context)
 {
-    sf::Font& font = getContext().fonts->get(Fonts::Default);
+    auto playButton = std::make_shared<GUI::Button>(*context.fonts, *context.textures);
+    playButton->setPosition(100, 250);
+    playButton->setText("Play");
+    playButton->setCallback([this] () {
+        requestStackPop();
+        requestStackPush(States::Game);
+    });
 
-    sf::Text playOption;
-    playOption.setFont(font);
-    playOption.setString("Play");
-    centerOrigin(playOption);
-
-    playOption.setPosition(context.window->getView().getSize() / 2.0f);
-
-    _options.push_back(playOption);
+    _guiContainer.pack(playButton);
 }
 
 void MenuState::draw() {
+    sf::RenderWindow& window =  *getContext().window;
 
+    window.setView(window.getDefaultView());
+    window.draw(_backgroundSprite);
+    window.draw(_guiContainer);
 }
 
 bool MenuState::update(sf::Time deltaTime) {
-    return false;
+    return true;
 }
 
 bool MenuState::handleEvent(const sf::Event &event) {
-    if (event.type == sf::Event::KeyPressed) {
-        if (event.key.code == sf::Keyboard::Up) {
-            if (_optionIndex > 0) {
-                _optionIndex -= 1;
-            } else {
-                _optionIndex = _options.size() - 1;
-            }
-
-            updateOptionText();
-        } else if (event.key.code == sf::Keyboard::Down) {
-            if (_optionIndex < _options.size() - 1) {
-                _optionIndex += 1;
-            } else {
-                _optionIndex = 0;
-            }
-
-            updateOptionText();
-        }
-
-        if (event.key.code == sf::Keyboard::Return) {
-            if (_optionIndex == Play) {
-                requestStackPop();
-                requestStackPush(States::Game);
-            } else if (_optionIndex == Exit) {
-                requestStackPop();
-            }
-        }
-    }
-
-    return true;
+    _guiContainer.handleEvent(event);
 }
 
 void MenuState::updateOptionText() {

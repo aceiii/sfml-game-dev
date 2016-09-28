@@ -2,9 +2,11 @@
 #define __COMPONENT_H__
 
 #include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/Transformable.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/Window/Event.hpp>
-#include <SFML/Graphics/Transformable.hpp>
 
 
 namespace GUI {
@@ -28,6 +30,9 @@ namespace GUI {
         virtual void deactivate();
 
         virtual void handleEvent(const sf::Event& event) = 0;
+
+    protected:
+        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     private:
         bool _isSelected;

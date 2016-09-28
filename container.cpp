@@ -82,3 +82,11 @@ bool Container::hasSelection()
     return _selectedChild >= 0 && _selectedChild < _children.size();
 }
 
+void Container::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    states.transform *= getTransform();
+    for (auto it = _children.begin(); it != _children.end(); it++) {
+        pointer_type child = *it;
+        target.draw(*child, states);
+    }
+}
+

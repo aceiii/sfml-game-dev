@@ -59,3 +59,7 @@ void GUI::Button::setText(const std::string &text) {
 void GUI::Button::setCallback(GUI::Button::function func) {
     _callback = func;
 }
+
+void GUI::Button::handleEvent(const sf::Event &event) {
+
+}

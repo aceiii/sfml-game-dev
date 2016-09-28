@@ -2,6 +2,7 @@
 #define __MENU_STATE_H__
 
 #include "state.h"
+#include "container.h"
 
 
 class MenuState: public State
@@ -11,6 +12,7 @@ public:
 
     virtual void draw() override;
     virtual bool update(sf::Time deltaTime) override;
+
     virtual bool handleEvent(const sf::Event &event) override;
 
 private:
@@ -26,6 +28,8 @@ private:
     std::vector<sf::Text> _options;
     std::size_t _optionIndex;
 
+    GUI::Container _guiContainer;
+    sf::Sprite _backgroundSprite;
 };
 
 

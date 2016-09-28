@@ -27,6 +27,8 @@ namespace GUI
         virtual void activate();
         virtual void deactivate();
 
+        virtual void handleEvent(const sf::Event& event);
+
         void setText(const std::string& text);
         void setCallback(function func);
 

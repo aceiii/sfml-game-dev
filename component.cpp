@@ -29,3 +29,8 @@ void GUI::Component::activate() {
 void GUI::Component::deactivate() {
 
 }
+
+void GUI::Component::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    states.transform *= getTransform();
+    target.draw(*this, states);
+}
