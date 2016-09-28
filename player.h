@@ -14,6 +14,7 @@ public:
     {
         MoveLeft,
         MoveRight,
+        ActionCount,
     };
 
     Player();

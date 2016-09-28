@@ -23,3 +23,7 @@ void Label::setText(const std::string& text)
     _text.setString(text);
 }
 
+void Label::handleEvent(const sf::Event &event) {
+
+}
+
