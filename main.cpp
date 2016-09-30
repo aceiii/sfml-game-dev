@@ -17,8 +17,9 @@ int main(int argc, char *argv[]) {
         Application app;
         app.run();
     } catch (std::exception& e) {
-        LOG(FATAL) << "\nEXCEPTION: " << e.what() << std::endl;
+        LOG(FATAL) << e.what() << std::endl;
+        return EXIT_FAILURE;
     }
-    return 0;
+    return EXIT_SUCCESS;
 }
 
