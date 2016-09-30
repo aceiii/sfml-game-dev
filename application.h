@@ -15,6 +15,7 @@ public:
     void run();
 
 protected:
+    void registerMedia();
     void registerStates();
 
     void update(sf::Time deltaTime);

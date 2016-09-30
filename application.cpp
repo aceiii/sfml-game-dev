@@ -3,11 +3,13 @@
 #include "menustate.h"
 #include "gamestate.h"
 #include "pausestate.h"
+#include "resourcepath.h"
 
 Application::Application():
     _window(sf::VideoMode(640, 480), "The Game!"),
     _stateStack(_window, _textures, _fonts, _player)
 {
+    registerMedia();
     registerStates();
 
     _stateStack.pushState(States::Menu);
@@ -27,6 +29,21 @@ void Application::run()
         }
         draw();
     }
+}
+
+void Application::registerMedia() {
+    // FONTS
+    _fonts.load(Fonts::Default, resourcePath("media/fonts/arial.ttf"));
+    _fonts.load(Fonts::Label, resourcePath("media/fonts/arial.ttf"));
+
+    // TEXTURES
+    _textures.load(Textures::Desert, resourcePath("media/textures/desert.png"));
+    _textures.load(Textures::Raptor, resourcePath("media/textures/raptor.png"));
+    _textures.load(Textures::Eagle, resourcePath("media/textures/eagle.png"));
+    _textures.load(Textures::ButtonNormal, resourcePath("media/textures/button-normal.png"));
+    _textures.load(Textures::ButtonPressed, resourcePath("media/textures/button-pressed.png"));
+    _textures.load(Textures::ButtonSelected, resourcePath("media/textures/button-selected.png"));
+    _textures.load(Textures::TitleScreen, resourcePath("media/textures/title-bg.png"));
 }
 
 void Application::registerStates() {
