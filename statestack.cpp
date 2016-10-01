@@ -2,25 +2,19 @@
 #include <algorithm>
 
 #include "statestack.h"
+#include "easylogging++.h"
 
 
 StateStack::StateStack(sf::RenderWindow &window, TextureHolder &textures, FontHolder &fonts, Player &player):
     _context(window, textures, fonts, player)
 {
+    LOG(INFO) << "Constructing state stack.";
 }
 
 void StateStack::update(const sf::Time &deltaTime) {
-//    for (auto it = _stack.begin(); it != _stack.end(); it++) {
-//        if (!(*it)->update(deltaTime)) {
-//            return;
-//        }
-//    }
-
-
     std::for_each(_stack.begin(), _stack.end(), [&deltaTime] (std::unique_ptr<State>& state) {
         state->update(deltaTime);
     });
-
 }
 
 void StateStack::draw() {
@@ -40,14 +34,17 @@ void StateStack::handleEvent(const sf::Event &event) {
 }
 
 void StateStack::pushState(States::ID stateID) {
+    LOG(DEBUG) << "Pushing state (" << stateID << ").";
     _stack.push_back(createState(stateID));
 }
 
 void StateStack::popState() {
+    LOG(DEBUG) << "Popping state.";
     _stack.pop_back();
 }
 
 void StateStack::clearStates() {
+    LOG(DEBUG) << "Clearing states.";
     _stack.clear();
 }
 

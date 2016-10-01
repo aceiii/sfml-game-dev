@@ -4,6 +4,7 @@
 #include "gamestate.h"
 #include "pausestate.h"
 #include "resourcepath.h"
+#include "easylogging++.h"
 
 Application::Application():
     _window(sf::VideoMode(640, 480), "The Game!"),
@@ -17,6 +18,8 @@ Application::Application():
 
 void Application::run()
 {
+    LOG(INFO) << "Starting game loop.";
+
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
     while (_window.isOpen()) {
@@ -32,11 +35,12 @@ void Application::run()
 }
 
 void Application::registerMedia() {
-    // FONTS
+
+    LOG(INFO) << "Loading fonts.";
     _fonts.load(Fonts::Default, resourcePath("media/fonts/arial.ttf"));
     _fonts.load(Fonts::Label, resourcePath("media/fonts/arial.ttf"));
 
-    // TEXTURES
+    LOG(INFO) << "Loading textures.";
     _textures.load(Textures::Desert, resourcePath("media/textures/desert.png"));
     _textures.load(Textures::Raptor, resourcePath("media/textures/raptor.png"));
     _textures.load(Textures::Eagle, resourcePath("media/textures/eagle.png"));
