@@ -35,17 +35,17 @@ void StateStack::handleEvent(const sf::Event &event) {
 
 void StateStack::pushState(States::ID stateID) {
     LOG(DEBUG) << "Pushing state (" << stateID << ").";
-    _stack.push_back(createState(stateID));
+    _pendingList.emplace_back(StateStack::Push, stateID);
 }
 
 void StateStack::popState() {
     LOG(DEBUG) << "Popping state.";
-    _stack.pop_back();
+    _pendingList.emplace_back(StateStack::Pop, States::Game);
 }
 
 void StateStack::clearStates() {
     LOG(DEBUG) << "Clearing states.";
-    _stack.clear();
+    _pendingList.emplace_back(StateStack::Clear, States::Game);
 }
 
 bool StateStack::isEmpty() const {

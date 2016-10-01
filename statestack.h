@@ -45,6 +45,9 @@ private:
     {
         Action action;
         States::ID stateID;
+
+        PendingChange(Action _action, States::ID _id):
+            action(_action),stateID(_id) {}
     };
 
 private:
