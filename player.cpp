@@ -9,6 +9,8 @@
 Player::Player() {
     _keyBinding[sf::Keyboard::Left] = MoveLeft;
     _keyBinding[sf::Keyboard::Right] = MoveRight;
+    _keyBinding[sf::Keyboard::Up] = MoveUp;
+    _keyBinding[sf::Keyboard::Down] = MoveDown;
 
     _actionBinding[MoveLeft].action = [=] (SceneNode& node, sf::Time dt) {
         node.move(-playerSpeed * dt.asSeconds(), 0.0f);
@@ -58,4 +60,14 @@ sf::Keyboard::Key Player::getAssignedKey(Player::Action action) const {
 
 bool Player::isRealtimeAction(Player::Action action) {
     return true;
+}
+
+std::string Player::actionToString(Player::Action action) {
+    switch (action) {
+        case MoveLeft: return "Move Left";
+        case MoveRight: return "Move Right";
+        case MoveUp: return "Move Up";
+        case MoveDown: return "Move Down";
+        default: return "Player::Action";
+    }
 }

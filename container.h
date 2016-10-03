@@ -31,7 +31,7 @@ namespace GUI
 
     private:
         std::vector<GUI::Component::pointer_type> _children;
-        int _selectedChild;
+        std::size_t _selectedChild;
 
     };
 

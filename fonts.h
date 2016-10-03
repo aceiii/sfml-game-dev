@@ -9,6 +9,7 @@ public:
     {
         Default,
         Label,
+        Button,
     };
 };
 

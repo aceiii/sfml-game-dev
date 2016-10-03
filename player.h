@@ -14,8 +14,12 @@ public:
     {
         MoveLeft,
         MoveRight,
+        MoveUp,
+        MoveDown,
         ActionCount,
     };
+
+    static std::string actionToString(Action action);
 
     Player();
 

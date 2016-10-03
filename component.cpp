@@ -1,6 +1,8 @@
 #include "component.h"
 
-GUI::Component::Component() {
+GUI::Component::Component():
+    _isActive(false),_isSelected(false)
+{
 }
 
 GUI::Component::~Component() {
@@ -19,13 +21,13 @@ void GUI::Component::deselect() {
 }
 
 bool GUI::Component::isActive() const {
-    return false;
+    return _isActive;
 }
 
 void GUI::Component::activate() {
-
+    _isActive = true;
 }
 
 void GUI::Component::deactivate() {
-
+    _isActive = false;
 }

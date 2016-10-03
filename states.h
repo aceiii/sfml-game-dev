@@ -11,6 +11,7 @@ public:
         Menu,
         Game,
         Pause,
+        Settings,
     };
 
 };

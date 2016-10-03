@@ -3,6 +3,7 @@
 #include "menustate.h"
 #include "gamestate.h"
 #include "pausestate.h"
+#include "settingsstate.h"
 #include "resourcepath.h"
 #include "easylogging++.h"
 
@@ -39,6 +40,7 @@ void Application::registerMedia() {
     LOG(INFO) << "Loading fonts.";
     _fonts.load(Fonts::Default, resourcePath("media/fonts/arial.ttf"));
     _fonts.load(Fonts::Label, resourcePath("media/fonts/arial.ttf"));
+    _fonts.load(Fonts::Button, resourcePath("media/fonts/arial.ttf"));
 
     LOG(INFO) << "Loading textures.";
     _textures.load(Textures::Desert, resourcePath("media/textures/desert.png"));
@@ -55,6 +57,8 @@ void Application::registerStates() {
     _stateStack.registerState<MenuState>(States::Menu);
     _stateStack.registerState<GameState>(States::Game);
     _stateStack.registerState<PauseState>(States::Pause);
+    _stateStack.registerState<SettingsState>(States::Settings);
+
 }
 
 void Application::processInput() {
@@ -71,6 +75,9 @@ void Application::processInput() {
 
 void Application::update(sf::Time deltaTime) {
     _stateStack.update(deltaTime);
+    if (_stateStack.isEmpty()) {
+        _window.close();
+    }
 }
 
 void Application::draw() {

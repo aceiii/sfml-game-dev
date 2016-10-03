@@ -9,15 +9,41 @@
 MenuState::MenuState(StateStack &stateStack, State::Context context):
     State(stateStack, context)
 {
-    auto playButton = std::make_shared<GUI::Button>(*context.fonts, *context.textures);
-    playButton->setPosition(100, 250);
+    FontHolder& fonts = *getContext().fonts;
+    TextureHolder& textures = *getContext().textures;
+    sf::RenderWindow& window = *getContext().window;
+
+    _backgroundSprite.setTexture(textures.get(Textures::TitleScreen));
+    _backgroundSprite.setTextureRect(window.getViewport(window.getView()));
+
+    auto playButton = std::make_shared<GUI::Button>(fonts, textures);
+    playButton->setPosition(150, 250);
     playButton->setText("Play");
     playButton->setCallback([this] () {
+        LOG(DEBUG) << "Play button handler called.";
         requestStackPop();
         requestStackPush(States::Game);
     });
 
+    auto settingsButton = std::make_shared<GUI::Button>(fonts, textures);
+    settingsButton->setPosition(150, 315);
+    settingsButton->setText("Settings");
+    settingsButton->setCallback([this] () {
+        LOG(DEBUG) << "Going to settings.";
+        requestStackPush(States::Settings);
+    });
+
+    auto exitButton = std::make_shared<GUI::Button>(fonts, textures);
+    exitButton->setPosition(150, 380);
+    exitButton->setText("Exit");
+    exitButton->setCallback([this] () {
+        LOG(DEBUG) << "Exit handler called.";
+        requestStateClear();
+    });
+
     _guiContainer.pack(playButton);
+    _guiContainer.pack(settingsButton);
+    _guiContainer.pack(exitButton);
 }
 
 void MenuState::draw() {

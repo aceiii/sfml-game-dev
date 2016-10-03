@@ -1,4 +1,6 @@
 #include "container.h"
+#include "easylogging++.h"
+#include "util.h"
 
 using namespace GUI;
 
@@ -28,12 +30,14 @@ void Container::handleEvent(const sf::Event& event)
     if (hasSelection() && _children[_selectedChild]->isActive()) {
         _children[_selectedChild]->handleEvent(event);
     } else if (event.type == sf::Event::KeyReleased) {
+        LOG(DEBUG) << "Container.handleEvent() - " << keyToString(event.key.code);
         if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) {
             selectPrevious();
         } else if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down) {
             selectNext();
         } else if (event.key.code == sf::Keyboard::Return || event.key.code == sf::Keyboard::Space) {
             if (hasSelection()) {
+                LOG(DEBUG) << "Activate child at " << _selectedChild;
                 _children[_selectedChild]->activate();
             }
         }
@@ -42,6 +46,8 @@ void Container::handleEvent(const sf::Event& event)
 
 void Container::select(std::size_t index)
 {
+    LOG(INFO) << "Container.select(" << index << ")";
+
     if (_children[index]->isSelectable()) {
         if (hasSelection()) {
             _children[_selectedChild]->deselect();
@@ -53,6 +59,8 @@ void Container::select(std::size_t index)
 
 void Container::selectNext()
 {
+    LOG(INFO) << "Container.selectNext()";
+
     if (!hasSelection()) {
         return;
     }
@@ -66,6 +74,8 @@ void Container::selectNext()
 
 void Container::selectPrevious()
 {
+    LOG(INFO) << "Container.selectPrevious()";
+
     if (!hasSelection()) {
         return;
     }
