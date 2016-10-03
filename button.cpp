@@ -11,6 +11,8 @@ GUI::Button::Button(const FontHolder &fonts, const TextureHolder &textures):
 
     _text.setFont(fonts.get(Fonts::Button));
     _text.setPosition(sf::Vector2f(_normalTexture.getSize() / 2u));
+
+    _isToggle = false;
 }
 
 GUI::Button::~Button() {
