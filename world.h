@@ -28,14 +28,6 @@ private:
     void buildScene();
 
 private:
-    enum Layer
-    {
-        Background,
-        Air,
-        layerCount,
-    };
-
-private:
     sf::RenderWindow& _window;
     sf::View _worldView;
     TextureHolder _textures;
