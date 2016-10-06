@@ -24,7 +24,9 @@ public:
     Player();
 
     void assignKey(Action action, sf::Keyboard::Key key);
+    void removeAssignedKey(sf::Keyboard::Key key);
     sf::Keyboard::Key getAssignedKey(Action action) const;
+    Action getActionForKey(sf::Keyboard::Key key) const;
 
     void handleEvent(const sf::Event& event, CommandQueue& commands);
     void handleRealtimeInput(CommandQueue& commands);

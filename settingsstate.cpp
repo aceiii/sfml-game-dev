@@ -48,9 +48,14 @@ void SettingsState::updateLabels()
 
     for (std::size_t i = 0; i < Player::ActionCount; i += 1) {
         Player::Action action = static_cast<Player::Action>(i);
-        sf::Keyboard::Key key = player.getAssignedKey(action);
-        if (_bindingLabels.find(action) != _bindingLabels.end()) {
-            _bindingLabels[action]->setText(toString(key));
+        try {
+            sf::Keyboard::Key key = player.getAssignedKey(action);
+            if (_bindingLabels.find(action) != _bindingLabels.end()) {
+                _bindingLabels[action]->setText(toString(key));
+            }
+        } catch (const std::range_error& e) {
+            LOG(DEBUG) << "Removing label for action '" << Player::actionToString(action) << "'";
+            _bindingLabels[action]->setText("");
         }
     }
 }
@@ -67,8 +72,30 @@ bool SettingsState::handleEvent(const sf::Event &event)
         if (_bindingButtons[action]->isActive()) {
             isKeyBinding = true;
             if (event.type == sf::Event::KeyReleased) {
-                getContext().player->assignKey(action, event.key.code);
+                Player& player = *getContext().player;
+                sf::Keyboard::Key key = event.key.code;
+
+                try {
+                    sf::Keyboard::Key prevKey = player.getAssignedKey(action);
+
+                    LOG(DEBUG) << "Removing previous key: '" << keyToString(key) << "'";
+                    player.removeAssignedKey(prevKey);
+                } catch (const std::range_error& e) {
+                    LOG(DEBUG) << "Key not yet assigned.";
+                }
+
+                try {
+                    Player::Action prevAction = player.getActionForKey(key);
+
+                    LOG(DEBUG) << "Removing key for previous action: '" << Player::actionToString(prevAction) << "'";
+                    player.removeAssignedKey(key);
+                } catch (const std::range_error& e) {
+                    LOG(DEBUG) << "No previous key assigned to action.";
+                }
+
+                player.assignKey(action, event.key.code);
                 _bindingButtons[action]->deactivate();
+                _bindingButtons[action]->select();
             }
             break;
         }

@@ -44,9 +44,24 @@ void Player::handleRealtimeInput(CommandQueue &commands) {
     }
 }
 
+void Player::removeAssignedKey(sf::Keyboard::Key key) {
+    auto it = _keyBinding.find(key);
+    assert(it != _keyBinding.end());
+
+    _keyBinding.erase(it);
+}
+
 void Player::assignKey(Player::Action action, sf::Keyboard::Key key) {
     assert(_keyBinding.find(key) == _keyBinding.end());
     _keyBinding[key] = action;
+}
+
+Player::Action Player::getActionForKey(sf::Keyboard::Key key) const {
+    auto it = _keyBinding.find(key);
+    if (it != _keyBinding.end()) {
+        return it->second;
+    }
+    throw std::range_error("No action for key");
 }
 
 sf::Keyboard::Key Player::getAssignedKey(Player::Action action) const {
