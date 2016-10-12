@@ -1,3 +1,4 @@
+#include <sstream>
 #include "aircraft.h"
 #include "category.h"
 #include "datatables.h"
@@ -33,6 +34,18 @@ void Aircraft::accelerate(sf::Vector2f velocity) {
 
 void Aircraft::accelerate(float vx, float vy) {
     setVelocity(vx, vy);
+}
+
+void Aircraft::updateCurrent(sf::Time delta) {
+    _healthDisplay->setString(toString(getHitpoints()) + " HP");
+    _healthDisplay->setPosition(0.0f, 50.0f);
+    _healthDisplay->setRotation(-getRotation());
+}
+
+std::string Aircraft::toString(int i) const {
+    std::stringstream ss;
+    ss << i;
+    return ss.str();
 }
 
 Textures::ID toTextureId(Aircraft::Type type) {

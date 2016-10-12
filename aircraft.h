@@ -30,6 +30,11 @@ public:
     void accelerate(float vx, float vy);
 
 private:
+    virtual void updateCurrent(sf::Time delta) override;
+
+    std::string toString(int i) const;
+
+private:
     Type _type;
 
     sf::Sprite _sprite;
