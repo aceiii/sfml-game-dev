@@ -17,3 +17,26 @@ void Entity::updateCurrent(sf::Time dt) {
     move(_velocity * dt.asSeconds());
 }
 
+Entity::Entity(int hitpoints):_hitpoints(hitpoints) {
+}
+
+void Entity::repair(int points) {
+    _hitpoints += points;
+}
+
+void Entity::damage(int points) {
+    _hitpoints -= points;
+}
+
+void Entity::destroy() {
+    _hitpoints = 0;
+}
+
+int Entity::getHitpoints() const {
+    return 0;
+}
+
+bool Entity::isDestroyed() const {
+    return false;
+}
+

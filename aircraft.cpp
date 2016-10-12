@@ -1,8 +1,13 @@
 #include "aircraft.h"
 #include "category.h"
+#include "datatables.h"
+
+namespace {
+    const std::vector<AircraftData> g_table = initializeAircraftData();
+}
 
 Aircraft::Aircraft(Type type, const TextureHolder& textures)
-    :_type(type),_sprite(textures.get(toTextureId(type)))
+    :Entity(g_table[type].hitpoints),_type(type),_sprite(textures.get(toTextureId(type)))
 {
 }
 
@@ -29,10 +34,10 @@ void Aircraft::accelerate(float vx, float vy) {
 
 Textures::ID toTextureId(Aircraft::Type type) {
     switch (type) {
-    case Aircraft::Type::Eagle:
-        return Textures::ID::Eagle;
-    case Aircraft::Type::Raptor:
-        return Textures::ID::Raptor;
+    case Aircraft::Eagle:
+        return Textures::Eagle;
+    case Aircraft::Raptor:
+        return Textures::Raptor;
     }
 }
 
