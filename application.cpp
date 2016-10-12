@@ -39,6 +39,7 @@ void Application::registerMedia() {
 
     LOG(INFO) << "Loading fonts.";
     _fonts.load(Fonts::Default, resourcePath("media/fonts/arial.ttf"));
+    _fonts.load(Fonts::Main, resourcePath("media/fonts/arial.ttf"));
     _fonts.load(Fonts::Label, resourcePath("media/fonts/arial.ttf"));
     _fonts.load(Fonts::Button, resourcePath("media/fonts/arial.ttf"));
 

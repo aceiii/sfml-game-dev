@@ -6,9 +6,12 @@ namespace {
     const std::vector<AircraftData> g_table = initializeAircraftData();
 }
 
-Aircraft::Aircraft(Type type, const TextureHolder& textures)
+Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& fonts)
     :Entity(g_table[type].hitpoints),_type(type),_sprite(textures.get(toTextureId(type)))
 {
+    std::unique_ptr<TextNode> healthDisplay(new TextNode(fonts, ""));
+    _healthDisplay = healthDisplay.get();
+    attachChild(std::move(healthDisplay));
 }
 
 void Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {

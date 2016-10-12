@@ -1,7 +1,7 @@
 #include "gamestate.h"
 
 GameState::GameState(StateStack &stateStack, State::Context context):
-    State(stateStack, context),_world(*context.window),_player(*context.player)
+    State(stateStack, context),_world(context),_player(*context.player)
 {
 }
 

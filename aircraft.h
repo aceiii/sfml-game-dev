@@ -3,6 +3,7 @@
 
 #include "entity.h"
 #include "textureholder.h"
+#include "textnode.h"
 
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
@@ -19,7 +20,7 @@ public:
     };
 
 public:
-    explicit Aircraft(Type type, const TextureHolder& textures);
+    explicit Aircraft(Type type, const TextureHolder& textures, const FontHolder& fonts);
 
     virtual unsigned int getCategory() const;
 
@@ -32,6 +33,8 @@ private:
     Type _type;
 
     sf::Sprite _sprite;
+
+    TextNode* _healthDisplay;
 };
 
 

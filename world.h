@@ -5,6 +5,7 @@
 #include "textureholder.h"
 #include "layers.h"
 #include "aircraft.h"
+#include "state.h"
 #include "commandqueue.h"
 
 #include <SFML/Graphics.hpp>
@@ -16,7 +17,7 @@
 class World: sf::NonCopyable
 {
 public:
-    explicit World(sf::RenderWindow& window);
+    explicit World(State::Context& context);
 
     void update(sf::Time deltaTime);
     void draw();
@@ -24,13 +25,13 @@ public:
     CommandQueue& getCommandQueue();
 
 private:
-    void loadTextures();
     void buildScene();
 
 private:
     sf::RenderWindow& _window;
     sf::View _worldView;
-    TextureHolder _textures;
+    TextureHolder& _textures;
+    FontHolder& _fonts;
     SceneNode _sceneGraph;
     std::array<SceneNode*, LayerCount> _sceneLayers;
 
