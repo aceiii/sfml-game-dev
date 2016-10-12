@@ -6,10 +6,18 @@
 #include "aircraft.h"
 
 
+struct Direction {
+    Direction(float angle, float distance);
+
+    float angle;
+    float distance;
+};
+
 struct AircraftData {
     int hitpoints;
     float speed;
     Textures::ID texture;
+    std::vector<Direction> directions;
 };
 
 

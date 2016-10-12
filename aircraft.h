@@ -16,6 +16,7 @@ public:
     enum Type {
         Eagle,
         Raptor,
+        Avenger,
         TypeCount,
     };
 
