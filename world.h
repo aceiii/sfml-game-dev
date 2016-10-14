@@ -17,12 +17,27 @@
 class World: sf::NonCopyable
 {
 public:
+    struct SpawnPoint {
+        Aircraft::Type type;
+        float x;
+        float y;
+
+        SpawnPoint(Aircraft::Type type, float x, float y):
+            type(type),x(x),y(y) {}
+    };
+
+public:
     explicit World(State::Context& context);
 
     void update(sf::Time deltaTime);
     void draw();
 
+    void spawnEnemies();
+    void addEnemies();
+
     CommandQueue& getCommandQueue();
+
+    sf::FloatRect getBattlefieldBounds() const;
 
 private:
     void buildScene();
@@ -39,6 +54,8 @@ private:
     sf::Vector2f _spawnPosition;
     float _scrollSpeed;
     Aircraft* _playerAircraft;
+
+    std::vector<SpawnPoint> _enemySpawnPoints;
 
     CommandQueue _commandQueue;
 };

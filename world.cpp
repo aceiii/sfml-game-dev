@@ -90,3 +90,34 @@ void World::update(sf::Time dt) {
 CommandQueue &World::getCommandQueue() {
     return _commandQueue;
 }
+
+sf::FloatRect World::getBattlefieldBounds() const {
+    sf::FloatRect bounds = _window.getDefaultView().getViewport();
+    bounds.top += 128;
+
+    return bounds;
+}
+
+void World::spawnEnemies() {
+    while (!_enemySpawnPoints.empty() && _enemySpawnPoints.back().y > getBattlefieldBounds().top) {
+        SpawnPoint spawn = _enemySpawnPoints.back();
+
+        std::unique_ptr<Aircraft> enemy(new Aircraft(spawn.type, _textures, _fonts));
+        enemy->setPosition(spawn.x, spawn.y);
+        enemy->setRotation(180.0f);
+
+        _sceneLayers[Air]->attachChild(std::move(enemy));
+
+        _enemySpawnPoints.pop_back();
+    }
+}
+
+void World::addEnemies() {
+    addEnemy(Aircraft::Raptor, 0.0f, 500.0f);
+    addEnemy(Aircraft::Avenger, -70.0f, 1400.0f);
+
+    std::sort(_enemySpawnPoints.begin(), _enemySpawnPoints.end(),
+    [] (SpawnPoint lhs, SpawnPoint rhs) {
+        return lhs.y < rhs.y;
+    });
+}
