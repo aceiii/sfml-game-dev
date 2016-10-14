@@ -34,6 +34,7 @@ public:
 
     void spawnEnemies();
     void addEnemies();
+    void addEnemy(Aircraft::Type type, float x, float y);
 
     CommandQueue& getCommandQueue();
 

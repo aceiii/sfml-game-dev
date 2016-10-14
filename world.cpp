@@ -121,3 +121,7 @@ void World::addEnemies() {
         return lhs.y < rhs.y;
     });
 }
+
+void World::addEnemy(Aircraft::Type type, float x, float y) {
+    _enemySpawnPoints.push_back(SpawnPoint(type, x, y));
+}
