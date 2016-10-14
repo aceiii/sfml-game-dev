@@ -1,7 +1,9 @@
 #include <sstream>
+#include <cmath>
 #include "aircraft.h"
 #include "category.h"
 #include "datatables.h"
+#include "util.h"
 
 namespace {
     const std::vector<AircraftData> g_table = initializeAircraftData();
@@ -42,10 +44,28 @@ void Aircraft::updateCurrent(sf::Time delta) {
     _healthDisplay->setRotation(-getRotation());
 }
 
-std::string Aircraft::toString(int i) const {
-    std::stringstream ss;
-    ss << i;
-    return ss.str();
+void Aircraft::updateMovementPattern(sf::Time dt) {
+    const std::vector<Direction>& directions = g_table[_type].directions;
+    if (!directions.empty()) {
+        float distanceToTravel = directions[_directionIndex].distance;
+        if (_travelledDistance > distanceToTravel) {
+            _directionIndex = (_directionIndex + 1) % directions.size();
+            _travelledDistance = 0.0f;
+        }
+
+        float radians = toRadians(directions[_directionIndex].angle + 90.0f);
+        float vx = getMaxSpeed() * std::cos(radians);
+        float vy = getMaxSpeed() * std::sin(radians);
+
+        setVelocity(vx, vy);
+
+        _travelledDistance += getMaxSpeed() * dt.asSeconds();
+    }
+}
+
+float Aircraft::getMaxSpeed() const {
+    sf::Vector2f velocity = getVelocity();
+    return sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
 }
 
 Textures::ID toTextureId(Aircraft::Type type) {
@@ -54,6 +74,9 @@ Textures::ID toTextureId(Aircraft::Type type) {
         return Textures::Eagle;
     case Aircraft::Raptor:
         return Textures::Raptor;
+    default:
+        assert(false);
+        return Textures::Eagle;
     }
 }
 

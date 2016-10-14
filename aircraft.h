@@ -23,9 +23,9 @@ public:
 public:
     explicit Aircraft(Type type, const TextureHolder& textures, const FontHolder& fonts);
 
-    virtual unsigned int getCategory() const;
+    virtual unsigned int getCategory() const override;
 
-    virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
+    virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
 
     void accelerate(sf::Vector2f velocity);
     void accelerate(float vx, float vy);
@@ -33,7 +33,9 @@ public:
 private:
     virtual void updateCurrent(sf::Time delta) override;
 
-    std::string toString(int i) const;
+    void updateMovementPattern(sf::Time dt);
+
+    float getMaxSpeed() const;
 
 private:
     Type _type;
@@ -41,6 +43,9 @@ private:
     sf::Sprite _sprite;
 
     TextNode* _healthDisplay;
+
+    float _travelledDistance;
+    int _directionIndex;
 };
 
 

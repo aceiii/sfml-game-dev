@@ -1,6 +1,7 @@
 #ifndef __UTIL_H__
 #define __UTIL_H__
 
+#include <sstream>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Rect.hpp>
@@ -11,7 +12,20 @@ void centerOrigin(T& item) {
     item.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
 }
 
+template<typename T>
+std::string toString(T t) {
+    std::stringstream ss;
+    ss << t;
+    return ss.str();
+}
+
 std::string keyToString(const sf::Keyboard::Key& key);
+
+float toRadians(float deg);
+double toRadians(double deg);
+
+float toDegrees(float rads);
+double toDegrees(double rads);
 
 
 #endif//__UTIL_H__

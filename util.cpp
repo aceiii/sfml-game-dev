@@ -1,3 +1,5 @@
+#include <sstream>
+#include <complex>
 #include "util.h"
 
 std::string keyToString(const sf::Keyboard::Key& key) {
@@ -106,4 +108,20 @@ std::string keyToString(const sf::Keyboard::Key& key) {
         case sf::Keyboard::Pause: return "Pause";
         default: return "Unknown";
     }
+}
+
+float toRadians(float deg) {
+    return static_cast<float>(M_PI / 180.0 * deg);
+}
+
+double toRadians(double deg) {
+    return M_PI / 180 * deg;
+}
+
+float toDegrees(float rads) {
+    return static_cast<float>(rads * 180.0 * M_PI);
+}
+
+double toDegrees(double rads) {
+    return rads * 180.0 * M_PI;
 }
