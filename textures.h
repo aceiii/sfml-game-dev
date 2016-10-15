@@ -14,6 +14,9 @@ namespace Textures
         ButtonNormal,
         ButtonSelected,
         ButtonPressed,
+        AlliedBullet,
+        EnemyBullet,
+        Missile,
     };
 }
 

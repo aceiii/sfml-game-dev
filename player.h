@@ -16,6 +16,8 @@ public:
         MoveRight,
         MoveUp,
         MoveDown,
+        Fire,
+        LaunchMissile,
         ActionCount,
     };
 
@@ -32,6 +34,8 @@ public:
     void handleRealtimeInput(CommandQueue& commands);
 
 private:
+    void initializeActions();
+
     static bool isRealtimeAction(Action action);
 
 private:

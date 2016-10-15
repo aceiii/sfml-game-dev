@@ -1,4 +1,5 @@
 #include "datatables.h"
+#include "projectile.h"
 
 std::vector<AircraftData> initializeAircraftData() {
     std::vector<AircraftData> data(Aircraft::TypeCount);
@@ -24,7 +25,18 @@ std::vector<AircraftData> initializeAircraftData() {
     data[Aircraft::Avenger].directions.push_back(Direction(45, 50));
 
     return data;
+}
 
+std::vector<ProjectileData> initializeProjectileData() {
+    std::vector<ProjectileData> data(Projectile::TypeCount);
+
+    data[Projectile::AlliedBullet].texture = Textures::AlliedBullet;
+
+    data[Projectile::EnemyBullet].texture = Textures::EnemyBullet;
+
+    data[Projectile::Missile].texture = Textures::Missile;
+
+    return data;
 }
 
 Direction::Direction(float angle, float distance):

@@ -11,7 +11,17 @@ Player::Player() {
     _keyBinding[sf::Keyboard::Right] = MoveRight;
     _keyBinding[sf::Keyboard::Up] = MoveUp;
     _keyBinding[sf::Keyboard::Down] = MoveDown;
+    _keyBinding[sf::Keyboard::Space] = Fire;
+    _keyBinding[sf::Keyboard::M] = LaunchMissile;
 
+    initializeActions();
+
+    for (auto it = _actionBinding.begin(); it != _actionBinding.end(); it++) {
+        it->second.category = Category::PlayerAircraft;
+    }
+}
+
+void Player::initializeActions() {
     _actionBinding[MoveLeft].action = [=] (SceneNode& node, sf::Time dt) {
         node.move(-playerSpeed * dt.asSeconds(), 0.0f);
     };
@@ -20,9 +30,10 @@ Player::Player() {
         node.move(playerSpeed * dt.asSeconds(), 0.0f);
     };
 
-    for (auto it = _actionBinding.begin(); it != _actionBinding.end(); it++) {
-        it->second.category = Category::PlayerAircraft;
-    }
+    using namespace std::placeholders;
+
+    _actionBinding[Fire].action = derivedAction<Aircraft>(std::bind(&Aircraft::fire, _1));
+    _actionBinding[LaunchMissile].action = derivedAction<Aircraft>(std::bind(&Aircraft::launchMissile, _1));
 }
 
 void Player::handleEvent(const sf::Event &event, CommandQueue &commands) {
@@ -74,7 +85,16 @@ sf::Keyboard::Key Player::getAssignedKey(Player::Action action) const {
 }
 
 bool Player::isRealtimeAction(Player::Action action) {
-    return true;
+    switch (action) {
+        case MoveLeft:
+        case MoveRight:
+        case MoveUp:
+        case MoveDown:
+        case Fire:
+            return true;
+        default:
+            return false;
+    }
 }
 
 std::string Player::actionToString(Player::Action action) {

@@ -4,6 +4,8 @@
 #include "entity.h"
 #include "textureholder.h"
 #include "textnode.h"
+#include "commandqueue.h"
+#include "projectile.h"
 
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
@@ -30,6 +32,10 @@ public:
     void accelerate(sf::Vector2f velocity);
     void accelerate(float vx, float vy);
 
+    bool isAllied() const;
+    void fire();
+    void launchMissile();
+
 private:
     virtual void updateCurrent(sf::Time delta) override;
 
@@ -37,15 +43,23 @@ private:
 
     float getMaxSpeed() const;
 
+    void checkProjectileLaunch(sf::Time dt, CommandQueue& commands);
+    void createBullets(SceneNode& node, const TextureHolder& textures) const;
+    void createProjectile(SceneNode& node, Projectile::Type type, float xOffset, float yOffset, const TextureHolder& textures) const;
+
 private:
     Type _type;
-
     sf::Sprite _sprite;
-
     TextNode* _healthDisplay;
-
     float _travelledDistance;
     int _directionIndex;
+    bool _isFiring;
+    bool _isLaunchingMissile;
+    int _fireRateLevel;
+    int _spreadLevel;
+    sf::Time _fireCountdown;
+    Command _fireCommand;
+    Command _missileCommand;
 };
 
 

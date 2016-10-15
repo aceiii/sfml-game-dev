@@ -2,6 +2,7 @@
 #define __ENTITY_H__
 
 #include "scenenode.h"
+#include "commandqueue.h"
 
 #include <SFML/System/Vector2.hpp>
 
@@ -21,8 +22,8 @@ public:
     void setVelocity(float vx, float vy);
     sf::Vector2f getVelocity() const;
 
-private:
-    virtual void updateCurrent(sf::Time deltaTime);
+protected:
+    virtual void updateCurrent(sf::Time deltaTime, CommandQueue& commands);
 
 private:
     int _hitpoints;

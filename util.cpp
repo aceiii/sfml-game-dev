@@ -125,3 +125,12 @@ float toDegrees(float rads) {
 double toDegrees(double rads) {
     return rads * 180.0 * M_PI;
 }
+
+sf::Vector2f unitVector(sf::Vector2f pos) {
+    float dist = std::sqrt(pos.x * pos.x + pos.y * pos.y);
+    
+    pos.x /= dist;
+    pos.y /= dist;
+
+    return pos;
+}

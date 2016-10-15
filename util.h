@@ -27,5 +27,7 @@ double toRadians(double deg);
 float toDegrees(float rads);
 double toDegrees(double rads);
 
+sf::Vector2f unitVector(sf::Vector2f pos);
+
 
 #endif//__UTIL_H__
