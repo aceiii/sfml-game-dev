@@ -128,9 +128,14 @@ double toDegrees(double rads) {
 
 sf::Vector2f unitVector(sf::Vector2f pos) {
     float dist = std::sqrt(pos.x * pos.x + pos.y * pos.y);
-    
+
     pos.x /= dist;
     pos.y /= dist;
 
     return pos;
+}
+
+float distance(const SceneNode &node1, const SceneNode &node2) {
+    sf::Vector2f vec = node1.getWorldPosition() - node2.getWorldPosition();
+    return std::sqrt(vec.x * vec.x + vec.y * vec.y);
 }

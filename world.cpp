@@ -3,6 +3,9 @@
 
 #include "world.h"
 #include "spritenode.h"
+#include "category.h"
+#include "derivedaction.h"
+#include "util.h"
 
 
 World::World(State::Context& context):
@@ -124,4 +127,43 @@ void World::addEnemies() {
 
 void World::addEnemy(Aircraft::Type type, float x, float y) {
     _enemySpawnPoints.push_back(SpawnPoint(type, x, y));
+}
+
+void World::guideMissiles() {
+    Command enemyCollector;
+    enemyCollector.category = Category::EnemyAircraft;
+    enemyCollector.action = derivedAction<Aircraft>([this] (Aircraft& enemy, sf::Time) {
+        if (!enemy.isDestroyed()) {
+            _activeEnemies.push_back(&enemy);
+        }
+    });
+
+    Command missileGuider;
+    missileGuider.category = Category::AlliedProjectile;
+    missileGuider.action = derivedAction<Projectile>([this] (Projectile& missile, sf::Time) {
+        if (!missile.isGuided()) {
+            return;
+        }
+
+        float minDistance = std::numeric_limits<float>::max();
+        Aircraft* closestEnemy = nullptr;
+
+        for (auto it = begin(_activeEnemies); it != end(_activeEnemies); it++) {
+            Aircraft* enemy = *it;
+
+            float enemyDistance = distance(missile, *enemy);
+            if (enemyDistance < minDistance) {
+                closestEnemy = enemy;
+                minDistance = enemyDistance;
+            }
+        }
+
+        if (closestEnemy) {
+            missile.guideTowards(closestEnemy->getWorldPosition());
+        }
+    });
+
+    _commandQueue.push(enemyCollector);
+    _commandQueue.push(missileGuider);
+    _activeEnemies.clear();
 }

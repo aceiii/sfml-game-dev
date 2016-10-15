@@ -5,6 +5,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Rect.hpp>
+#include "scenenode.h"
 
 template <typename T>
 void centerOrigin(T& item) {
@@ -29,5 +30,6 @@ double toDegrees(double rads);
 
 sf::Vector2f unitVector(sf::Vector2f pos);
 
+float distance(const SceneNode& node1, const SceneNode& node2);
 
 #endif//__UTIL_H__

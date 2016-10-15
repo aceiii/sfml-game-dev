@@ -35,6 +35,7 @@ public:
     void spawnEnemies();
     void addEnemies();
     void addEnemy(Aircraft::Type type, float x, float y);
+    void guideMissiles();
 
     CommandQueue& getCommandQueue();
 
@@ -57,6 +58,7 @@ private:
     Aircraft* _playerAircraft;
 
     std::vector<SpawnPoint> _enemySpawnPoints;
+    std::vector<Aircraft*> _activeEnemies;
 
     CommandQueue _commandQueue;
 };
