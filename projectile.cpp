@@ -26,7 +26,7 @@ unsigned int Projectile::getCategory() const {
 }
 
 sf::FloatRect Projectile::getBoundingRect() const {
-    return sf::FloatRect();
+    return getWorldTransform().transformRect(_sprite.getGlobalBounds());
 }
 
 float Projectile::getMaxSpeed() const {

@@ -40,6 +40,8 @@ public:
     void increaseFireSpread();
     void increaseFireRate();
 
+    virtual sf::FloatRect getBoundingRect() const override;
+
 private:
     virtual void updateCurrent(sf::Time delta) override;
 

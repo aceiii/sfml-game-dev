@@ -20,7 +20,7 @@ public:
     Pickup(Type type, const TextureHolder& textures);
 
     virtual unsigned int getCategory() const override;
-    virtual sf::FloatRect getBoundingRect() const;
+    virtual sf::FloatRect getBoundingRect() const override;
 
     void apply(Aircraft& player) const;
 

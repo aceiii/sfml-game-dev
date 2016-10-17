@@ -3,6 +3,7 @@
 #include "scenenode.h"
 #include "category.h"
 #include "command.h"
+#include "util.h"
 
 SceneNode::SceneNode() {
 }
@@ -73,6 +74,32 @@ void SceneNode::onCommand(const Command &command, sf::Time deltaTime) {
 
     for (auto it = _children.begin(); it != _children.end(); it++) {
         (*it)->onCommand(command, deltaTime);
+    }
+}
+
+sf::FloatRect SceneNode::getBoundingRect() const {
+    return sf::FloatRect();
+}
+
+void SceneNode::checkNodeCollision(SceneNode &node, std::set<SceneNode::pair_type> &collisionPairs) {
+    if (this != &node && !isDestroyed() && !node.isDestroyed() && collision(*this, node)) {
+        collisionPairs.insert(std::minmax(this, &node));
+    }
+
+    for (auto it = begin(_children); it != end(_children); it++) {
+        (*it)->checkNodeCollision(node, collisionPairs);
+    }
+}
+
+bool SceneNode::isDestroyed() const {
+    return _destroyed;
+}
+
+void SceneNode::checkSceneCollision(SceneNode &sceneGraph, std::set<SceneNode::pair_type> &collisionPairs) {
+    checkNodeCollision(sceneGraph, collisionPairs);
+
+    for (auto it = begin(sceneGraph._children); it != end(sceneGraph._children); it++) {
+        checkSceneCollision(**it, collisionPairs);
     }
 }
 

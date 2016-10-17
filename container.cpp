@@ -89,7 +89,7 @@ void Container::selectPrevious()
 
 bool Container::hasSelection()
 {
-    return _selectedChild >= 0 && _selectedChild < _children.size();
+    return _selectedChild < _children.size();
 }
 
 void Container::draw(sf::RenderTarget &target, sf::RenderStates states) const {

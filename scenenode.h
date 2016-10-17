@@ -11,6 +11,7 @@
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <set>
 
 #include "command.h"
 
@@ -19,6 +20,7 @@ class SceneNode: public sf::Transformable, public sf::Drawable, private sf::NonC
 {
 public:
     typedef std::unique_ptr<SceneNode> pointer_type;
+    typedef std::pair<SceneNode*, SceneNode*> pair_type;
 
 public:
     SceneNode();
@@ -28,12 +30,18 @@ public:
 
     void update(sf::Time deltaTime);
 
+    bool isDestroyed() const;
+
     sf::Transform getWorldTransform() const;
     sf::Vector2f getWorldPosition() const;
+    virtual sf::FloatRect getBoundingRect() const;
 
     virtual unsigned int getCategory() const;
 
     void onCommand(const Command& command, sf::Time deltaTime);
+
+    void checkNodeCollision(SceneNode& node, std::set<pair_type>& collisionPairs);
+    void checkSceneCollision(SceneNode& sceneGraph, std::set<pair_type>& collisionPairs);
 
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -45,6 +53,8 @@ private:
 private:
     std::vector<pointer_type> _children;
     SceneNode* _parent;
+
+    bool _destroyed;
 };
 
 

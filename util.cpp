@@ -139,3 +139,7 @@ float distance(const SceneNode &node1, const SceneNode &node2) {
     sf::Vector2f vec = node1.getWorldPosition() - node2.getWorldPosition();
     return std::sqrt(vec.x * vec.x + vec.y * vec.y);
 }
+
+bool collision(const SceneNode &lhs, const SceneNode &rhs) {
+    return lhs.getBoundingRect().intersects(rhs.getBoundingRect());
+}

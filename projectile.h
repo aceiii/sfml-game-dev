@@ -22,7 +22,7 @@ public:
     bool isGuided() const;
 
     virtual unsigned int getCategory() const override;
-    virtual sf::FloatRect getBoundingRect() const;
+    virtual sf::FloatRect getBoundingRect() const override;
     float getMaxSpeed() const;
     int getDamage() const;
 

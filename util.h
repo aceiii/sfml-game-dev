@@ -32,4 +32,7 @@ sf::Vector2f unitVector(sf::Vector2f pos);
 
 float distance(const SceneNode& node1, const SceneNode& node2);
 
+bool collision(const SceneNode& lhs, const SceneNode& rhs);
+
+
 #endif//__UTIL_H__

@@ -164,6 +164,10 @@ void Aircraft::increaseFireRate() {
     _fireRateLevel += 1;
 }
 
+sf::FloatRect Aircraft::getBoundingRect() const {
+    return getWorldTransform().transformRect(_sprite.getGlobalBounds());
+}
+
 Textures::ID toTextureId(Aircraft::Type type) {
     switch (type) {
     case Aircraft::Eagle:
