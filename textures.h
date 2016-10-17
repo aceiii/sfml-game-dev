@@ -17,6 +17,10 @@ namespace Textures
         AlliedBullet,
         EnemyBullet,
         Missile,
+        HealthRefill,
+        MissileRefill,
+        FireSpread,
+        FireRate,
     };
 }
 

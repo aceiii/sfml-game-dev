@@ -36,6 +36,10 @@ public:
     void fire();
     void launchMissile();
 
+    void collectMissiles(int i);
+    void increaseFireSpread();
+    void increaseFireRate();
+
 private:
     virtual void updateCurrent(sf::Time delta) override;
 
@@ -57,6 +61,7 @@ private:
     bool _isLaunchingMissile;
     int _fireRateLevel;
     int _spreadLevel;
+    int _missileCount;
     sf::Time _fireCountdown;
     Command _fireCommand;
     Command _missileCommand;

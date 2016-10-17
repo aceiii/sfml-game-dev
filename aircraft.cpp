@@ -152,6 +152,18 @@ bool Aircraft::isAllied() const {
     return category != Category::EnemyAircraft;
 }
 
+void Aircraft::collectMissiles(int i) {
+    _missileCount += i;
+}
+
+void Aircraft::increaseFireSpread() {
+    _spreadLevel += 1;
+}
+
+void Aircraft::increaseFireRate() {
+    _fireRateLevel += 1;
+}
+
 Textures::ID toTextureId(Aircraft::Type type) {
     switch (type) {
     case Aircraft::Eagle:

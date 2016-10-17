@@ -24,9 +24,14 @@ struct ProjectileData {
     Textures::ID texture;
 };
 
+struct PickupData {
+    Textures::ID texture;
+    std::function<void(Aircraft&)> action;
+};
+
 std::vector<AircraftData> initializeAircraftData();
 std::vector<ProjectileData> initializeProjectileData();
-
+std::vector<PickupData> initializePickupData();
 
 
 #endif//__DATA_TABLES_H__

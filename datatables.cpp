@@ -1,5 +1,6 @@
 #include "datatables.h"
 #include "projectile.h"
+#include "pickup.h"
 
 std::vector<AircraftData> initializeAircraftData() {
     std::vector<AircraftData> data(Aircraft::TypeCount);
@@ -35,6 +36,26 @@ std::vector<ProjectileData> initializeProjectileData() {
     data[Projectile::EnemyBullet].texture = Textures::EnemyBullet;
 
     data[Projectile::Missile].texture = Textures::Missile;
+
+    return data;
+}
+
+std::vector<PickupData> initializePickupData() {
+    using namespace std::placeholders;
+
+    std::vector<PickupData> data(Pickup::TypeCount);
+
+    data[Pickup::HealthRefill].texture = Textures::HealthRefill;
+    data[Pickup::HealthRefill].action = std::bind(&Aircraft::repair, _1, 25);
+
+    data[Pickup::MissileRefill].texture = Textures::MissileRefill;
+    data[Pickup::MissileRefill].action = std::bind(&Aircraft::collectMissiles, _1, 3);
+
+    data[Pickup::FireSpread].texture = Textures::FireSpread;
+    data[Pickup::FireSpread].action = std::bind(&Aircraft::increaseFireSpread, _1);
+
+    data[Pickup::FireRate].texture = Textures::FireRate;
+    data[Pickup::FireRate].action = std::bind(&Aircraft::increaseFireRate, _1);
 
     return data;
 }
