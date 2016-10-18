@@ -92,7 +92,7 @@ void SceneNode::checkNodeCollision(SceneNode &node, std::set<SceneNode::pair_typ
 }
 
 bool SceneNode::isDestroyed() const {
-    return _destroyed;
+    return false;
 }
 
 void SceneNode::checkSceneCollision(SceneNode &sceneGraph, std::set<SceneNode::pair_type> &collisionPairs) {

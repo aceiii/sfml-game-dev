@@ -30,7 +30,7 @@ public:
 
     void update(sf::Time deltaTime);
 
-    bool isDestroyed() const;
+    virtual bool isDestroyed() const;
 
     sf::Transform getWorldTransform() const;
     sf::Vector2f getWorldPosition() const;

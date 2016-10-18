@@ -16,7 +16,7 @@ public:
     void destroy();
 
     int getHitpoints() const;
-    bool isDestroyed() const;
+    virtual bool isDestroyed() const override;
 
     void setVelocity(sf::Vector2f velocity);
     void setVelocity(float vx, float vy);
