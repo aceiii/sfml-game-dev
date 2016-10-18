@@ -33,10 +33,10 @@ void Entity::destroy() {
 }
 
 int Entity::getHitpoints() const {
-    return 0;
+    return _hitpoints;
 }
 
 bool Entity::isDestroyed() const {
-    return false;
+    return _hitpoints <= 0;
 }
 

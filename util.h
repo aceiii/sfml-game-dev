@@ -6,6 +6,7 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include "scenenode.h"
+#include "category.h"
 
 template <typename T>
 void centerOrigin(T& item) {
@@ -33,6 +34,6 @@ sf::Vector2f unitVector(sf::Vector2f pos);
 float distance(const SceneNode& node1, const SceneNode& node2);
 
 bool collision(const SceneNode& lhs, const SceneNode& rhs);
-
+bool matchesCategories(SceneNode::pair_type& colliders, Category::Type type1, Category::Type type2);
 
 #endif//__UTIL_H__

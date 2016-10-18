@@ -36,6 +36,7 @@ public:
     void addEnemies();
     void addEnemy(Aircraft::Type type, float x, float y);
     void guideMissiles();
+    void handleCollisions();
 
     CommandQueue& getCommandQueue();
 

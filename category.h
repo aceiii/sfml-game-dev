@@ -18,6 +18,7 @@ namespace Category
         EnemyAircraft       = 1 << 4,
         AlliedProjectile    = 1 << 5,
         EnemyProjectile     = 1 << 6,
+        Pickup              = 1 << 7,
     };
 }
 

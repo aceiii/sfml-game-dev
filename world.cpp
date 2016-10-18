@@ -6,6 +6,7 @@
 #include "category.h"
 #include "derivedaction.h"
 #include "util.h"
+#include "pickup.h"
 
 
 World::World(State::Context& context):
@@ -166,4 +167,34 @@ void World::guideMissiles() {
     _commandQueue.push(enemyCollector);
     _commandQueue.push(missileGuider);
     _activeEnemies.clear();
+}
+
+void World::handleCollisions() {
+    std::set<SceneNode::pair_type> collisionPairs;
+    _sceneGraph.checkSceneCollision(_sceneGraph, collisionPairs);
+
+    for (auto it = begin(collisionPairs); it != end(collisionPairs); it++) {
+        SceneNode::pair_type pair = *it;
+        if (matchesCategories(pair, Category::PlayerAircraft, Category::EnemyAircraft)) {
+            auto& player = static_cast<Aircraft&>(*pair.first);
+            auto& enemy = static_cast<Aircraft&>(*pair.second);
+
+            player.damage(enemy.getHitpoints());
+            enemy.destroy();
+        } else if (matchesCategories(pair, Category::PlayerAircraft, Category::Pickup)) {
+            auto& player = static_cast<Aircraft&>(*pair.first);
+            auto& pickup = static_cast<Pickup&>(*pair.second);
+
+            pickup.apply(player);
+            pickup.destroy();
+        } else if (matchesCategories(pair, Category::EnemyAircraft, Category::AlliedProjectile)
+            || matchesCategories(pair, Category::PlayerAircraft, Category::EnemyProjectile)) {
+
+            auto& aircraft = static_cast<Aircraft&>(*pair.first);
+            auto& projectile = static_cast<Projectile&>(*pair.second);
+
+            aircraft.damage(projectile.getDamage());
+            projectile.destroy();
+        }
+    }
 }
