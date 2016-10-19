@@ -44,13 +44,22 @@ void Application::registerMedia() {
     _fonts.load(Fonts::Button, resourcePath("media/fonts/arial.ttf"));
 
     LOG(INFO) << "Loading textures.";
-    _textures.load(Textures::Desert, resourcePath("media/textures/desert.png"));
-    _textures.load(Textures::Raptor, resourcePath("media/textures/raptor.png"));
+
     _textures.load(Textures::Eagle, resourcePath("media/textures/eagle.png"));
-    _textures.load(Textures::ButtonNormal, resourcePath("media/textures/button-normal.png"));
-    _textures.load(Textures::ButtonPressed, resourcePath("media/textures/button-pressed.png"));
-    _textures.load(Textures::ButtonSelected, resourcePath("media/textures/button-selected.png"));
+    _textures.load(Textures::Raptor, resourcePath("media/textures/raptor.png"));
+    _textures.load(Textures::Avenger, resourcePath("media/textures/avenger.png"));
+    _textures.load(Textures::Desert, resourcePath("media/textures/desert.png"));
     _textures.load(Textures::TitleScreen, resourcePath("media/textures/title-bg.png"));
+    _textures.load(Textures::ButtonNormal, resourcePath("media/textures/button-normal.png"));
+    _textures.load(Textures::ButtonSelected, resourcePath("media/textures/button-selected.png"));
+    _textures.load(Textures::ButtonPressed, resourcePath("media/textures/button-pressed.png"));
+    _textures.load(Textures::AlliedBullet, resourcePath("media/textures/bullet.png"));
+    _textures.load(Textures::EnemyBullet, resourcePath("media/textures/bullet.png"));
+    _textures.load(Textures::Missile, resourcePath("Media/textures/missile.png"));
+    _textures.load(Textures::HealthRefill, resourcePath("Media/textures/health-refill.png"));
+    _textures.load(Textures::MissileRefill, resourcePath("Media/textures/missile-refill.png"));
+    _textures.load(Textures::FireSpread, resourcePath("Media/textures/fire-spread.png"));
+    _textures.load(Textures::FireRate, resourcePath("Media/textures/fire-rate.png"));
 }
 
 void Application::registerStates() {
