@@ -65,30 +65,20 @@ void World::update(sf::Time dt) {
     _worldView.move(0.0f, _scrollSpeed * dt.asSeconds());
     _playerAircraft->setVelocity(0.0f, 0.0f);
 
+    destroyEntitiesOutsideView();
+    guideMissiles();
+
     while (!_commandQueue.isEmpty()) {
         _sceneGraph.onCommand(_commandQueue.pop(), dt);
     }
 
-    sf::Vector2f velocity = _playerAircraft->getVelocity();
-
-    if (velocity.x != 0.0f && velocity.y != 0.0f) {
-        _playerAircraft->setVelocity(velocity / std::sqrt(2.0f));
-    }
-
-    _playerAircraft->accelerate(0.0f, _scrollSpeed);
+    adaptPlayerVelocity();
+    handleCollisions();
+    _sceneGraph.removeWrecks();
+    spawnEnemies();
 
     _sceneGraph.update(dt);
-
-    sf::FloatRect viewBounds(_worldView.getCenter() - _worldView.getSize() / 2.0f, _worldView.getSize());
-    const float borderDistance = 40.0f;
-
-    sf::Vector2f position = _playerAircraft->getPosition();
-    position.x = std::max(position.x, viewBounds.left + borderDistance);
-    position.x = std::min(position.x, viewBounds.left + viewBounds.width - borderDistance);
-    position.y = std::max(position.y, viewBounds.top + borderDistance);
-    position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
-
-    _playerAircraft->setPosition(position);
+    adaptPlayerPosition();
 }
 
 CommandQueue &World::getCommandQueue() {
@@ -197,4 +187,40 @@ void World::handleCollisions() {
             projectile.destroy();
         }
     }
+}
+
+void World::destroyEntitiesOutsideView() {
+    Command command;
+    command.category = Category::Projectile | Category::EnemyAircraft;
+    command.action = derivedAction<Entity>([this] (Entity& e, sf::Time) {
+        if (!getBattlefieldBounds().intersects(e.getBoundingRect())) {
+            e.destroy();
+        }
+    });
+
+    _commandQueue.push(command);
+
+}
+
+void World::adaptPlayerVelocity() {
+    sf::Vector2f velocity = _playerAircraft->getVelocity();
+
+    if (velocity.x != 0.0f && velocity.y != 0.0f) {
+        _playerAircraft->setVelocity(velocity / std::sqrt(2.0f));
+    }
+
+    _playerAircraft->accelerate(0.0f, _scrollSpeed);
+}
+
+void World::adaptPlayerPosition() {
+    sf::FloatRect viewBounds(_worldView.getCenter() - _worldView.getSize() / 2.0f, _worldView.getSize());
+    const float borderDistance = 40.0f;
+
+    sf::Vector2f position = _playerAircraft->getPosition();
+    position.x = std::max(position.x, viewBounds.left + borderDistance);
+    position.x = std::min(position.x, viewBounds.left + viewBounds.width - borderDistance);
+    position.y = std::max(position.y, viewBounds.top + borderDistance);
+    position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
+
+    _playerAircraft->setPosition(position);
 }

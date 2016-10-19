@@ -103,3 +103,14 @@ void SceneNode::checkSceneCollision(SceneNode &sceneGraph, std::set<SceneNode::p
     }
 }
 
+bool SceneNode::isMarkedForRemoval() const {
+    return isDestroyed();
+}
+
+void SceneNode::removeWrecks() {
+    auto wreckfieldBegin = std::remove_if(begin(_children), end(_children), std::mem_fn(&SceneNode::isMarkedForRemoval));
+    _children.erase(wreckfieldBegin, end(_children));
+
+    std::for_each(begin(_children), end(_children), std::mem_fn(&SceneNode::removeWrecks));
+}
+

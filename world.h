@@ -37,6 +37,7 @@ public:
     void addEnemy(Aircraft::Type type, float x, float y);
     void guideMissiles();
     void handleCollisions();
+    void destroyEntitiesOutsideView();
 
     CommandQueue& getCommandQueue();
 
@@ -44,6 +45,9 @@ public:
 
 private:
     void buildScene();
+
+    void adaptPlayerVelocity();
+    void adaptPlayerPosition();
 
 private:
     sf::RenderWindow& _window;

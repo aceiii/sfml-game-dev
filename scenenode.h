@@ -31,6 +31,8 @@ public:
     void update(sf::Time deltaTime);
 
     virtual bool isDestroyed() const;
+    virtual bool isMarkedForRemoval() const;
+    void removeWrecks();
 
     sf::Transform getWorldTransform() const;
     sf::Vector2f getWorldPosition() const;

@@ -19,6 +19,8 @@ namespace Category
         AlliedProjectile    = 1 << 5,
         EnemyProjectile     = 1 << 6,
         Pickup              = 1 << 7,
+
+        Projectile = AlliedProjectile | EnemyProjectile,
     };
 }
 

@@ -168,6 +168,10 @@ sf::FloatRect Aircraft::getBoundingRect() const {
     return getWorldTransform().transformRect(_sprite.getGlobalBounds());
 }
 
+bool Aircraft::isMarkedForRemoval() const {
+    return _isMarkedForRemoval;
+}
+
 Textures::ID toTextureId(Aircraft::Type type) {
     switch (type) {
     case Aircraft::Eagle:

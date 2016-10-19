@@ -42,6 +42,8 @@ public:
 
     virtual sf::FloatRect getBoundingRect() const override;
 
+    virtual bool isMarkedForRemoval() const override;
+
 private:
     virtual void updateCurrent(sf::Time delta) override;
 
@@ -67,6 +69,7 @@ private:
     sf::Time _fireCountdown;
     Command _fireCommand;
     Command _missileCommand;
+    bool _isMarkedForRemoval;
 };
 
 
