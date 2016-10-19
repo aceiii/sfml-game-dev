@@ -14,6 +14,7 @@
 #include <set>
 
 #include "command.h"
+#include "commandqueue.h"
 
 
 class SceneNode: public sf::Transformable, public sf::Drawable, private sf::NonCopyable
@@ -28,7 +29,7 @@ public:
     void attachChild(pointer_type child);
     pointer_type detachChild(const SceneNode& node);
 
-    void update(sf::Time deltaTime);
+    void update(sf::Time deltaTime, CommandQueue& commands);
 
     virtual bool isDestroyed() const;
     virtual bool isMarkedForRemoval() const;
@@ -49,8 +50,8 @@ private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 
-    virtual void updateCurrent(sf::Time deltaTime);
-    virtual void updateChildren(sf::Time deltaTime);
+    virtual void updateCurrent(sf::Time deltaTime, CommandQueue& commands);
+    virtual void updateChildren(sf::Time deltaTime, CommandQueue& commands);
 
 private:
     std::vector<pointer_type> _children;

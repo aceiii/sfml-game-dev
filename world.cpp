@@ -77,7 +77,7 @@ void World::update(sf::Time dt) {
     _sceneGraph.removeWrecks();
     spawnEnemies();
 
-    _sceneGraph.update(dt);
+    _sceneGraph.update(dt, _commandQueue);
     adaptPlayerPosition();
 }
 

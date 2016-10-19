@@ -45,7 +45,7 @@ public:
     virtual bool isMarkedForRemoval() const override;
 
 private:
-    virtual void updateCurrent(sf::Time delta) override;
+    virtual void updateCurrent(sf::Time delta, CommandQueue& commands) override;
 
     void updateMovementPattern(sf::Time dt);
 

@@ -23,7 +23,7 @@ public:
     sf::Vector2f getVelocity() const;
 
 protected:
-    virtual void updateCurrent(sf::Time deltaTime, CommandQueue& commands);
+    virtual void updateCurrent(sf::Time deltaTime, CommandQueue& commands) override ;
 
 private:
     int _hitpoints;

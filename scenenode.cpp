@@ -4,6 +4,7 @@
 #include "category.h"
 #include "command.h"
 #include "util.h"
+#include "commandqueue.h"
 
 SceneNode::SceneNode() {
 }
@@ -37,17 +38,17 @@ void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 void SceneNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {
 }
 
-void SceneNode::update(sf::Time dt) {
-    updateCurrent(dt);
-    updateChildren(dt);
+void SceneNode::update(sf::Time dt, CommandQueue& commands) {
+    updateCurrent(dt, commands);
+    updateChildren(dt, commands);
 }
 
-void SceneNode::updateCurrent(sf::Time dt) {
+void SceneNode::updateCurrent(sf::Time dt, CommandQueue& commands) {
 }
 
-void SceneNode::updateChildren(sf::Time dt) {
+void SceneNode::updateChildren(sf::Time dt, CommandQueue& commands) {
     for (auto it = _children.begin(); it != _children.end(); it++) {
-        (*it)->update(dt);
+        (*it)->update(dt, commands);
     }
 }
 

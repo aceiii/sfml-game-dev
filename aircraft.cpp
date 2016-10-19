@@ -50,7 +50,7 @@ void Aircraft::accelerate(float vx, float vy) {
     setVelocity(vx, vy);
 }
 
-void Aircraft::updateCurrent(sf::Time delta) {
+void Aircraft::updateCurrent(sf::Time delta, CommandQueue& commands) {
     _healthDisplay->setString(toString(getHitpoints()) + " HP");
     _healthDisplay->setPosition(0.0f, 50.0f);
     _healthDisplay->setRotation(-getRotation());
