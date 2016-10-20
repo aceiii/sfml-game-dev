@@ -32,10 +32,16 @@ std::vector<ProjectileData> initializeProjectileData() {
     std::vector<ProjectileData> data(Projectile::TypeCount);
 
     data[Projectile::AlliedBullet].texture = Textures::AlliedBullet;
+    data[Projectile::AlliedBullet].damage = 10;
+    data[Projectile::AlliedBullet].speed = 300.0f;
 
     data[Projectile::EnemyBullet].texture = Textures::EnemyBullet;
+    data[Projectile::EnemyBullet].damage = 10;
+    data[Projectile::EnemyBullet].speed = 300.0f;
 
     data[Projectile::Missile].texture = Textures::Missile;
+    data[Projectile::Missile].damage = 200;
+    data[Projectile::Missile].speed = 150.0f;
 
     return data;
 }

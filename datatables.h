@@ -22,6 +22,8 @@ struct AircraftData {
 
 struct ProjectileData {
     Textures::ID texture;
+    int damage;
+    float speed;
 };
 
 struct PickupData {

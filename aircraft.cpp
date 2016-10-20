@@ -12,8 +12,10 @@ namespace {
 }
 
 Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& fonts)
-    :Entity(g_table[type].hitpoints),_type(type),_sprite(textures.get(toTextureId(type)))
+    :Entity(g_table[type].hitpoints),_type(type),_sprite(textures.get(g_table[type].texture))
 {
+    centerOrigin(_sprite);
+
     std::unique_ptr<TextNode> healthDisplay(new TextNode(fonts, ""));
     _healthDisplay = healthDisplay.get();
     attachChild(std::move(healthDisplay));
@@ -42,15 +44,16 @@ unsigned int Aircraft::getCategory() const {
     }
 }
 
-void Aircraft::accelerate(sf::Vector2f velocity) {
-    setVelocity(getVelocity() + velocity);
-}
-
-void Aircraft::accelerate(float vx, float vy) {
-    setVelocity(vx, vy);
-}
-
 void Aircraft::updateCurrent(sf::Time delta, CommandQueue& commands) {
+    if (isDestroyed()) {
+        _isMarkedForRemoval = true;
+        return;
+    }
+
+    checkProjectileLaunch(delta, commands);
+    updateMovementPattern(delta);
+    Entity::updateCurrent(delta, commands);
+
     _healthDisplay->setString(toString(getHitpoints()) + " HP");
     _healthDisplay->setPosition(0.0f, 50.0f);
     _healthDisplay->setRotation(-getRotation());
@@ -76,8 +79,7 @@ void Aircraft::updateMovementPattern(sf::Time dt) {
 }
 
 float Aircraft::getMaxSpeed() const {
-    sf::Vector2f velocity = getVelocity();
-    return sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
+    return g_table[_type].speed;
 }
 
 void Aircraft::fire() {
@@ -171,16 +173,3 @@ sf::FloatRect Aircraft::getBoundingRect() const {
 bool Aircraft::isMarkedForRemoval() const {
     return _isMarkedForRemoval;
 }
-
-Textures::ID toTextureId(Aircraft::Type type) {
-    switch (type) {
-    case Aircraft::Eagle:
-        return Textures::Eagle;
-    case Aircraft::Raptor:
-        return Textures::Raptor;
-    default:
-        assert(false);
-        return Textures::Eagle;
-    }
-}
-

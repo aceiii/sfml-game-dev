@@ -11,15 +11,18 @@ void GameState::draw() {
 
 bool GameState::update(sf::Time deltaTime) {
     _world.update(deltaTime);
-    return false;
+
+    CommandQueue& commands = _world.getCommandQueue();
+    _player.handleRealtimeInput(commands);
+
+    return true;
 }
 
 bool GameState::handleEvent(const sf::Event &event) {
-    sf::RenderWindow& window = *getContext().window;
     CommandQueue& commands = _world.getCommandQueue();
 
     _player.handleEvent(event, commands);
-    _player.handleRealtimeInput(commands);
+    //_player.handleRealtimeInput(commands);
 
-    return false;
+    return true;
 }

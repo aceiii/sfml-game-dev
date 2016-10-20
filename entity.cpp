@@ -1,5 +1,8 @@
 #include "entity.h"
 
+Entity::Entity(int hitpoints):_hitpoints(hitpoints) {
+}
+
 void Entity::setVelocity(sf::Vector2f velocity) {
     _velocity = velocity;
 }
@@ -15,9 +18,6 @@ sf::Vector2f Entity::getVelocity() const {
 
 void Entity::updateCurrent(sf::Time dt, CommandQueue& commands) {
     move(_velocity * dt.asSeconds());
-}
-
-Entity::Entity(int hitpoints):_hitpoints(hitpoints) {
 }
 
 void Entity::repair(int points) {
@@ -40,3 +40,11 @@ bool Entity::isDestroyed() const {
     return _hitpoints <= 0;
 }
 
+void Entity::accelerate(sf::Vector2f velocity) {
+    _velocity += velocity;
+}
+
+void Entity::accelerate(float vx, float vy) {
+    _velocity.x += vx;
+    _velocity.y += vy;
+}

@@ -12,9 +12,11 @@ StateStack::StateStack(sf::RenderWindow &window, TextureHolder &textures, FontHo
 }
 
 void StateStack::update(const sf::Time &deltaTime) {
-    std::for_each(_stack.begin(), _stack.end(), [&deltaTime] (std::unique_ptr<State>& state) {
-        state->update(deltaTime);
-    });
+    for (auto it = begin(_stack); it != end(_stack); it++) {
+        if (!(*it)->update(deltaTime)) {
+            break;
+        }
+    }
 
     applyPendingChanges();
 }
@@ -26,14 +28,13 @@ void StateStack::draw() {
 }
 
 void StateStack::handleEvent(const sf::Event &event) {
-    for (auto it = _stack.rbegin(); it != _stack.rend(); it++) {
+    for (auto it = rbegin(_stack); it != rend(_stack); it++) {
         if (!(*it)->handleEvent(event)) {
-            applyPendingChanges();
-            return;
+            break;
         }
     }
 
-//    applyPendingChanges();
+    applyPendingChanges();
 }
 
 void StateStack::pushState(States::ID stateID) {
@@ -63,7 +64,7 @@ State::pointer_type StateStack::createState(States::ID stateID) {
 }
 
 void StateStack::applyPendingChanges() {
-    for (auto& pendingChange: _pendingList) {
+    for (auto pendingChange: _pendingList) {
         switch (pendingChange.action) {
         case Push:
             LOG(DEBUG) << "Pushing state (" << pendingChange.stateID << ").";

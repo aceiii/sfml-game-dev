@@ -5,7 +5,7 @@
 
 template<typename T>
 void StateStack::registerState(States::ID stateID) {
-    _factories[stateID] = [this, stateID=stateID] () {
+    _factories[stateID] = [this, stateID] () {
         LOG(DEBUG) << "Creating state of of type (" << stateID << ").";
         return State::pointer_type(new T(*this, _context));
     };

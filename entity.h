@@ -15,6 +15,9 @@ public:
     void damage(int points);
     void destroy();
 
+    void accelerate(sf::Vector2f velocity);
+    void accelerate(float vx, float vy);
+
     int getHitpoints() const;
     virtual bool isDestroyed() const override;
 
@@ -23,7 +26,7 @@ public:
     sf::Vector2f getVelocity() const;
 
 protected:
-    virtual void updateCurrent(sf::Time deltaTime, CommandQueue& commands) override ;
+    virtual void updateCurrent(sf::Time deltaTime, CommandQueue& commands) override;
 
 private:
     int _hitpoints;

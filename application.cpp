@@ -24,7 +24,6 @@ void Application::run()
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
     while (_window.isOpen()) {
-        processInput();
         timeSinceLastUpdate += clock.restart();
         while (timeSinceLastUpdate > TimePerFrame) {
             timeSinceLastUpdate -= TimePerFrame;

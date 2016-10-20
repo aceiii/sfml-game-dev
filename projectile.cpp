@@ -8,7 +8,8 @@ namespace {
 }
 
 Projectile::Projectile(Projectile::Type type, const TextureHolder &textures):
-    Entity(1),_type(type),_sprite(textures.get(g_table[type].texture)) {
+    Entity(1),_type(type),_sprite(textures.get(g_table[type].texture))
+{
     centerOrigin(_sprite);
 }
 
@@ -22,7 +23,10 @@ bool Projectile::isGuided() const {
 }
 
 unsigned int Projectile::getCategory() const {
-    return 0;
+    if (_type == EnemyBullet) {
+        return Category::EnemyProjectile;
+    }
+    return Category::AlliedProjectile;
 }
 
 sf::FloatRect Projectile::getBoundingRect() const {
@@ -30,11 +34,11 @@ sf::FloatRect Projectile::getBoundingRect() const {
 }
 
 float Projectile::getMaxSpeed() const {
-    return 0;
+    return g_table[_type].speed;
 }
 
 int Projectile::getDamage() const {
-    return 0;
+    return g_table[_type].damage;
 }
 
 void Projectile::updateCurrent(sf::Time dt, CommandQueue &commands) {
@@ -52,5 +56,5 @@ void Projectile::updateCurrent(sf::Time dt, CommandQueue &commands) {
 }
 
 void Projectile::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const {
-
+    target.draw(_sprite, states);
 }

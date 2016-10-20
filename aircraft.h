@@ -29,9 +29,7 @@ public:
 
     virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-    void accelerate(sf::Vector2f velocity);
-    void accelerate(float vx, float vy);
-
+    float getMaxSpeed() const;
     bool isAllied() const;
     void fire();
     void launchMissile();
@@ -48,9 +46,6 @@ private:
     virtual void updateCurrent(sf::Time delta, CommandQueue& commands) override;
 
     void updateMovementPattern(sf::Time dt);
-
-    float getMaxSpeed() const;
-
     void checkProjectileLaunch(sf::Time dt, CommandQueue& commands);
     void createBullets(SceneNode& node, const TextureHolder& textures) const;
     void createProjectile(SceneNode& node, Projectile::Type type, float xOffset, float yOffset, const TextureHolder& textures) const;
@@ -71,9 +66,6 @@ private:
     Command _missileCommand;
     bool _isMarkedForRemoval;
 };
-
-
-Textures::ID toTextureId(Aircraft::Type type);
 
 
 #endif//__AIRCRAT_H__
