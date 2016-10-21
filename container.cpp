@@ -4,7 +4,7 @@
 
 using namespace GUI;
 
-Container::Container():_children(),_selectedChild(-1)
+Container::Container():_children(),_selectedChild(0)
 {
 }
 
