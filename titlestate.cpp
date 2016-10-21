@@ -1,7 +1,11 @@
 #include "titlestate.h"
 
 TitleState::TitleState(StateStack &stateStack, State::Context context):
-    State(stateStack, context)
+    State(stateStack, context),
+    _backgroundSprite(),
+    _text(),
+    _showText(false),
+    _textEffectTime(sf::Time::Zero)
 {
 }
 
