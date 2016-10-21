@@ -5,8 +5,9 @@
 #include "command.h"
 #include "util.h"
 #include "commandqueue.h"
+#include "easylogging++.h"
 
-SceneNode::SceneNode() {
+SceneNode::SceneNode():_parent(nullptr) {
 }
 
 void SceneNode::attachChild(pointer_type child) {
