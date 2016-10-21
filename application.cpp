@@ -9,6 +9,9 @@
 
 Application::Application():
     _window(sf::VideoMode(640, 480), "The Game!"),
+    _textures(),
+    _fonts(),
+    _player(),
     _stateStack(_window, _textures, _fonts, _player)
 {
     registerMedia();
