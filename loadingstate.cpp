@@ -2,7 +2,11 @@
 #include "util.h"
 
 LoadingState::LoadingState(StateStack &stateStack, State::Context context):
-    State(stateStack, context)
+    State(stateStack, context),
+    _loadingText(),
+    _progressBarBackground(),
+    _progressBar(),
+    _loadingTask()
 {
     sf::RenderWindow& window = *context.window;
     sf::Font& font = context.fonts->get(Fonts::Default);
