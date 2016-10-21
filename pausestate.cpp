@@ -7,7 +7,7 @@
 PauseState::PauseState(StateStack &stateStack, State::Context context):
     State(stateStack, context),
     _pausedText(),
-    _instructionText(),
+    _instructionText()
 {
     sf::Font& font = getContext().fonts->get(Fonts::Default);
 
