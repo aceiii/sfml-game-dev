@@ -4,6 +4,11 @@
 
 #include "commandqueue.h"
 
+CommandQueue::CommandQueue():
+    _queue()
+{
+};
+
 void CommandQueue::push(const Command &command) {
     _queue.push(command);
 }
