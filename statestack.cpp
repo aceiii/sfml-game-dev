@@ -6,6 +6,10 @@
 
 
 StateStack::StateStack(sf::RenderWindow &window, TextureHolder &textures, FontHolder &fonts, Player &player):
+    sf::NonCopyable(),
+    _stack(),
+    _pendingList(),
+    _factories(),
     _context(window, textures, fonts, player)
 {
     LOG(INFO) << "Constructing state stack.";
