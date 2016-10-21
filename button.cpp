@@ -5,7 +5,11 @@
 GUI::Button::Button(const FontHolder &fonts, const TextureHolder &textures):
     _normalTexture(textures.get(Textures::ButtonNormal)),
     _selectedTexture(textures.get(Textures::ButtonSelected)),
-    _pressedTexture(textures.get(Textures::ButtonPressed))
+    _pressedTexture(textures.get(Textures::ButtonPressed)),
+    _sprite(),
+    _text(),
+    _isToggle(false),
+    _callback()
 {
     _sprite.setTexture(_normalTexture);
 
