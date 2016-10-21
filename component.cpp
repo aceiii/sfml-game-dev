@@ -1,7 +1,11 @@
 #include "component.h"
 
 GUI::Component::Component():
-    _isActive(false),_isSelected(false)
+    sf::Transformable(),
+    sf::Drawable(),
+    sf::NonCopyable(),
+    _isActive(false),
+    _isSelected(false)
 {
 }
 
