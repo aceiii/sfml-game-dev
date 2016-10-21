@@ -5,6 +5,7 @@
 #include "category.h"
 #include "aircraftmover.h"
 #include "derivedaction.h"
+#include "util.h"
 
 Player::Player() {
     _keyBinding[sf::Keyboard::Left] = MoveLeft;
@@ -45,22 +46,15 @@ void Player::initializeActions() {
     });
 
     _actionBinding[LaunchMissile].action = derivedAction<Aircraft>([] (Aircraft& a, sf::Time) {
+        LOG(DEBUG) << "launch missle action";
         a.launchMissile();
     });
 }
 
 void Player::handleEvent(const sf::Event &event, CommandQueue &commands) {
-//    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P) {
-//        Command output;
-//        output.category = Category::PlayerAircraft;
-//        output.action = [] (SceneNode& node, sf::Time dt) {
-//            LOG(INFO) << node.getPosition().x << "," << node.getPosition().y;
-//        };
-//        commands.push(output);
-//    }
     if (event.type == sf::Event::KeyPressed) {
         auto found = _keyBinding.find(event.key.code);
-        if (found != end(_keyBinding) && isRealtimeAction(found->second)) {
+        if (found != end(_keyBinding) && !isRealtimeAction(found->second)) {
             commands.push(_actionBinding[found->second]);
         }
     }

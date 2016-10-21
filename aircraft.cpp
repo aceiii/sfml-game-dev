@@ -136,6 +136,8 @@ void Aircraft::createBullets(SceneNode &node, const TextureHolder &textures) con
 void Aircraft::createProjectile(SceneNode &node, Projectile::Type type, float xOffset, float yOffset,
                                 const TextureHolder &textures) const {
 
+    LOG(INFO) << "createProjectile!";
+
     std::unique_ptr<Projectile> projectile(new Projectile(type, textures));
 
     sf::FloatRect bounds = _sprite.getGlobalBounds();
