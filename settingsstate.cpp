@@ -4,7 +4,11 @@
 #include "util.h"
 
 SettingsState::SettingsState(StateStack &stack, State::Context context):
-    State(stack, context), _guiContainer()
+    State(stack, context),
+    _guiContainer(),
+    _backgroundSprite(),
+    _bindingButtons(),
+    _bindingLabels()
 {
     sf::RenderWindow& window = *getContext().window;
     TextureHolder& textures = *getContext().textures;
