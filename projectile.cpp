@@ -8,7 +8,10 @@ namespace {
 }
 
 Projectile::Projectile(Projectile::Type type, const TextureHolder &textures):
-    Entity(1),_type(type),_sprite(textures.get(g_table[type].texture))
+    Entity(1),
+    _type(type),
+    _sprite(textures.get(g_table[type].texture)),
+    _targetDirection()
 {
     centerOrigin(_sprite);
 }
