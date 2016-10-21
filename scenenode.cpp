@@ -8,6 +8,9 @@
 #include "easylogging++.h"
 
 SceneNode::SceneNode():
+    sf::Transformable(),
+    sf::Drawable(),
+    sf::NonCopyable(),
     _parent(nullptr),
     _children(),
     _destroyed(false)
