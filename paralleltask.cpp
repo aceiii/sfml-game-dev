@@ -1,8 +1,12 @@
 #include <SFML/System/Lock.hpp>
 #include "paralleltask.h"
 
-ParallelTask::ParallelTask():_thread(&ParallelTask::runTask, this) {
-
+ParallelTask::ParallelTask():
+    _thread(&ParallelTask::runTask, this),
+    _finished(false),
+    _elapsedTime(),
+    _mutex()
+{
 }
 
 void ParallelTask::execute() {
