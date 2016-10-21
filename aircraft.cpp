@@ -11,8 +11,22 @@ namespace {
     const std::vector<AircraftData> g_table = initializeAircraftData();
 }
 
-Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& fonts)
-    :Entity(g_table[type].hitpoints),_type(type),_sprite(textures.get(g_table[type].texture))
+Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& fonts):
+    Entity(g_table[type].hitpoints),
+    _type(type),
+    _sprite(textures.get(g_table[type].texture)),
+    _healthDisplay(nullptr),
+    _travelledDistance(0),
+    _directionIndex(0),
+    _isFiring(false),
+    _isLaunchingMissile(false),
+    _fireRateLevel(1),
+    _spreadLevel(1),
+    _missileCount(2),
+    _fireCountdown(sf::Time::Zero),
+    _fireCommand(),
+    _missileCommand(),
+    _isMarkedForRemoval(false)
 {
     centerOrigin(_sprite);
 
