@@ -10,13 +10,20 @@
 
 
 World::World(State::Context& context):
+    sf::NonCopyable(),
     _window(*context.window),
     _worldView(_window.getDefaultView()),
     _worldBounds(0.0f, 0.0f, _worldView.getSize().x, 2000.0f),
-    _spawnPosition(_worldView.getSize().x / 2.0f, _worldBounds.height - _worldView.getSize().y),
+    _spawnPosition(_worldView.getSize().x / 2.0f, _worldBounds.height - _worldView.getSize().y / 2.0f),
     _playerAircraft(nullptr),
     _fonts(*context.fonts),
-    _textures(*context.textures)
+    _textures(*context.textures),
+    _sceneGraph(),
+    _sceneLayers(),
+    _scrollSpeed(-50.0f),
+    _enemySpawnPoints(),
+    _activeEnemies(),
+    _commandQueue()
 {
     buildScene();
 
