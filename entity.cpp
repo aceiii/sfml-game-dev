@@ -1,6 +1,7 @@
 #include "entity.h"
 
-Entity::Entity(int hitpoints):_hitpoints(hitpoints) {
+Entity::Entity(int hitpoints):_hitpoints(hitpoints),_velocity()
+{
 }
 
 void Entity::setVelocity(sf::Vector2f velocity) {
