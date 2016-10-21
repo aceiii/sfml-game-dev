@@ -7,7 +7,10 @@
 #include "derivedaction.h"
 #include "util.h"
 
-Player::Player() {
+Player::Player():
+    _keyBinding(),
+    _actionBinding()
+{
     _keyBinding[sf::Keyboard::Left] = MoveLeft;
     _keyBinding[sf::Keyboard::Right] = MoveRight;
     _keyBinding[sf::Keyboard::Up] = MoveUp;
@@ -23,19 +26,6 @@ Player::Player() {
 }
 
 void Player::initializeActions() {
-//    _actionBinding[MoveLeft].action = [=] (SceneNode& node, sf::Time dt) {
-//        node.move(-playerSpeed * dt.asSeconds(), 0.0f);
-//    };
-//
-//    _actionBinding[MoveRight].action = [=] (SceneNode& node, sf::Time dt) {
-//        node.move(playerSpeed * dt.asSeconds(), 0.0f);
-//    };
-//
-//    using namespace std::placeholders;
-//
-//    _actionBinding[Fire].action = derivedAction<Aircraft>(std::bind(&Aircraft::fire, _1));
-//    _actionBinding[LaunchMissile].action = derivedAction<Aircraft>(std::bind(&Aircraft::launchMissile, _1));
-
     _actionBinding[MoveLeft].action = derivedAction<Aircraft>(AircraftMover(-1, 0));
     _actionBinding[MoveRight].action = derivedAction<Aircraft>(AircraftMover(1, 0));
     _actionBinding[MoveUp].action = derivedAction<Aircraft>(AircraftMover(0, -1));
