@@ -1,7 +1,9 @@
 #include "gameoverstate.h"
 
-GameOverState::GameOverState(StateStack &stateStack, Context context):State(stateStack, context) {
-
+GameOverState::GameOverState(StateStack &stateStack, Context context):
+    State(stateStack, context),
+    _text()
+{
     sf::View view = getContext().window->getView();
 
     _text.setFont(getContext().fonts->get(Fonts::Default));
