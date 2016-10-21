@@ -7,7 +7,11 @@
 #include "button.h"
 
 MenuState::MenuState(StateStack &stateStack, State::Context context):
-    State(stateStack, context)
+    State(stateStack, context),
+    _options(),
+    _optionIndex(0),
+    _guiContainer(),
+    _backgroundSprite()
 {
     FontHolder& fonts = *getContext().fonts;
     TextureHolder& textures = *getContext().textures;
