@@ -9,7 +9,7 @@
 MenuState::MenuState(StateStack &stateStack, State::Context context):
     State(stateStack, context),
     _options(),
-    _optionIndex(0),
+    _optionIndex(),
     _guiContainer(),
     _backgroundSprite()
 {
@@ -48,6 +48,8 @@ MenuState::MenuState(StateStack &stateStack, State::Context context):
     _guiContainer.pack(playButton);
     _guiContainer.pack(settingsButton);
     _guiContainer.pack(exitButton);
+
+    playButton->select();
 }
 
 void MenuState::draw() {

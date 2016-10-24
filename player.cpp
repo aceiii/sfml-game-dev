@@ -36,7 +36,7 @@ void Player::initializeActions() {
     });
 
     _actionBinding[LaunchMissile].action = derivedAction<Aircraft>([] (Aircraft& a, sf::Time) {
-        LOG(DEBUG) << "launch missle action";
+        LOG(DEBUG) << "launch missile action";
         a.launchMissile();
     });
 }

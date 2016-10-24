@@ -7,13 +7,14 @@
 #include "commandqueue.h"
 #include "easylogging++.h"
 
-SceneNode::SceneNode():
+SceneNode::SceneNode(Category::Type category):
     sf::Transformable(),
     sf::Drawable(),
     sf::NonCopyable(),
     _parent(nullptr),
     _children(),
-    _destroyed(false)
+    _destroyed(false),
+    _defaultCategory(category)
 {
 }
 
@@ -74,7 +75,7 @@ sf::Vector2f SceneNode::getWorldPosition() const {
 }
 
 unsigned int SceneNode::getCategory() const {
-    return Category::None;
+    return _defaultCategory;
 }
 
 void SceneNode::onCommand(const Command &command, sf::Time deltaTime) {

@@ -22,6 +22,9 @@ namespace Category
 
         Projectile = AlliedProjectile | EnemyProjectile,
     };
+
+    std::string toString(Type category);
+    std::string toString(const int category);
 }
 
 

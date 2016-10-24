@@ -2,6 +2,7 @@
 #include "projectile.h"
 #include "datatables.h"
 #include "util.h"
+#include "easylogging++.h"
 
 namespace {
     std::vector<ProjectileData> g_table = initializeProjectileData();
@@ -45,6 +46,7 @@ int Projectile::getDamage() const {
 }
 
 void Projectile::updateCurrent(sf::Time dt, CommandQueue &commands) {
+    LOG(DEBUG) << "Projectile::updateCurrent()";
     if (isGuided()) {
         const float approachRate = 200.0f;
 

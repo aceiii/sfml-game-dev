@@ -7,6 +7,7 @@
 #include "derivedaction.h"
 #include "util.h"
 #include "pickup.h"
+#include "easylogging++.h"
 
 
 World::World(State::Context& context):
@@ -32,7 +33,9 @@ World::World(State::Context& context):
 
 void World::buildScene() {
     for (std::size_t i = 0; i < LayerCount; i += 1) {
-        SceneNode::pointer_type layer(new SceneNode());
+        Category::Type category = (i == Air) ? Category::SceneAirLayer : Category::None;
+
+        SceneNode::pointer_type layer(new SceneNode(category));
         _sceneLayers[i] = layer.get();
 
         _sceneGraph.attachChild(std::move(layer));
@@ -76,7 +79,9 @@ void World::update(sf::Time dt) {
     guideMissiles();
 
     while (!_commandQueue.isEmpty()) {
-        _sceneGraph.onCommand(_commandQueue.pop(), dt);
+        Command command = _commandQueue.pop();
+        //LOG(DEBUG) << "command: " << Category::toString(command.category);
+        _sceneGraph.onCommand(command, dt);
     }
 
     adaptPlayerVelocity();

@@ -15,6 +15,7 @@
 
 #include "command.h"
 #include "commandqueue.h"
+#include "category.h"
 
 
 class SceneNode: public sf::Transformable, public sf::Drawable, private sf::NonCopyable
@@ -24,7 +25,7 @@ public:
     typedef std::pair<SceneNode*, SceneNode*> pair_type;
 
 public:
-    SceneNode();
+    SceneNode(Category::Type category = Category::None);
 
     void attachChild(pointer_type child);
     pointer_type detachChild(const SceneNode& node);
@@ -54,9 +55,9 @@ private:
     virtual void updateChildren(sf::Time deltaTime, CommandQueue& commands);
 
 private:
+    Category::Type _defaultCategory;
     std::vector<pointer_type> _children;
     SceneNode* _parent;
-
     bool _destroyed;
 };
 
